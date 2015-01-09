@@ -72,7 +72,7 @@ def checkForAlert(local_file):
 
     # proceed if the hash is different, i.e. update
     print "New data from the WHO. Running scraper."
-    system('bash tool/run_scraper.sh')
+    os.system('bash tool/run_scraper.sh')
 
 
 ###############
