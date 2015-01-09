@@ -20,7 +20,7 @@ source(paste0(onSw(), 'code/sw_status.R'))
 getWHOFile <- function(date = NULL) {
   # building url using the current date
   if (is.null(date)) date <- Sys.Date()
-  date_url <- paste0('http://apps.who.int/gho/athena/xmart/data-coded.csv?target=EBOLA_MEASURE/CASES,DEATHS&filter=LOCATION:-;DATAPACKAGEID:', date, ';INDICATOR_TYPE:SITREP_CUMULATIVE;INDICATOR_TYPE:SITREP_CUMULATIVE_21_DAYS;SEX:-')
+  date_url <- paste0('http://apps.who.int/gho/athena/xmart/data-coded.csv?target=EBOLA_MEASURE/CASES,DEATHS&filter=LOCATION:-;DATAPACKAGEID:', date, ';INDICATOR_TYPE:SITREP_CUMULATIVE;INDICATOR_TYPE:SITREP_CUMULATIVE_21_DAYS;SEX:-;COUNTRY:GIN;COUNTRY:UNSPECIFIED;COUNTRY:LBR;COUNTRY:UNSPECIFIED;COUNTRY:SLE;COUNTRY:UNSPECIFIED;COUNTRY:GBR;COUNTRY:UNSPECIFIED;COUNTRY:MLI;COUNTRY:UNSPECIFIED;')
   
   # downloading the resulting file in a local
   # temporary csv file
