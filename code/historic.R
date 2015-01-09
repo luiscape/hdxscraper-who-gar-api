@@ -8,7 +8,7 @@ library(RCurl)
 library(rjson)
 
 # SW helper function
-onSw <- function(d = T, l = 'tool/') {
+onSw <- function(d = F, l = 'tool/') {
   if (d) return(l)
   else return("")
 }
