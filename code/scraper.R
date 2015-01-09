@@ -152,7 +152,7 @@ parseData <- function(custom_date = NULL) {
 runScraper <- function() {
   cat('-----------------------------\n')
   cat('Collecting current data.\n')
-  data <- parseData()
+  data <- parseData("2015-01-08")
   # only write data if it is a data.frame
   if (is.data.frame(data)) {
     writeTable(data, 'who_ebola_case_data', 'scraperwiki')
