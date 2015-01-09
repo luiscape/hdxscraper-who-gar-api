@@ -1,8 +1,9 @@
 ## Script to download data from the WHO, 
 ## parse it, and store it in a database.
 
+# Dependencies
 library(RCurl)
-library(rjson)  # may not need it
+# library(rjson)  # may not need it
 
 # SW helper function
 onSw <- function(d = T, l = "tool/") {
@@ -16,10 +17,10 @@ source(paste0(onSw(), 'code/sw_status.R'))
 
 # Function to query the WHO API and download
 # the file locally.
-getWHOFile <- function() {
+getWHOFile <- function(date = NULL) {
   # building url using the current date
-  current_date <- Sys.Date()
-  date_url <- paste0('http://apps.who.int/gho/athena/xmart/data-coded.csv?target=EBOLA_MEASURE/CASES,DEATHS&filter=LOCATION:-;DATAPACKAGEID:',current_date,';INDICATOR_TYPE:SITREP_CUMULATIVE;INDICATOR_TYPE:SITREP_CUMULATIVE_21_DAYS;SEX:-')
+  if (is.null(date)) date <- Sys.Date()
+  date_url <- paste0('http://apps.who.int/gho/athena/xmart/data-coded.csv?target=EBOLA_MEASURE/CASES,DEATHS&filter=LOCATION:-;DATAPACKAGEID:', date, ';INDICATOR_TYPE:SITREP_CUMULATIVE;INDICATOR_TYPE:SITREP_CUMULATIVE_21_DAYS;SEX:-')
   
   # downloading the resulting file in a local
   # temporary csv file
@@ -32,9 +33,16 @@ getWHOFile <- function() {
 
 # Parse the WHO data into a data.frame that
 # follows the format used in HDX.
-parseData <- function(file_path = getWHOFile()) {
+parseData <- function(custom_date = NA) {
+  
+  # downloading file
+  file_path = getWHOFile(date = custom_date)
+  
   # loading data
   data <- read.csv(file_path)
+  
+  # checking if there is data at all
+  if (nrow(data) == 0) return("Stopping. No new data.")
   
   # cleaning
   data$EPI_DATE <- NULL  # we use the reporting date
@@ -143,9 +151,9 @@ runScraper()
 # tryCatch(runScraper(),
 #          error = function(e) {
 #            cat('Error detected ... sending notification.')
-#            system('mail -s "WFP VAM figures failed." luiscape@gmail.com')
+#            system('mail -s "WHO Ebola figures failed." luiscape@gmail.com')
 #            changeSwStatus(type = "error", message = "Scraper failed.")
-# { stop("!!") }
+#            { stop("!!") }
 #          }
 # )
 # 
