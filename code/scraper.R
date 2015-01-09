@@ -129,7 +129,13 @@ parseData <- function(custom_date = NULL) {
   }
   
   data <- createIndicators()
-  names(data) <- c("Country", "Date", "value", "Indicator")
+  
+  # reorganizing the indicators
+  # sqlite doesn't match columns
+  data <- data.frame(Indicator = data$Indicator,
+                     Country = data$COUNTRY,
+                     Date = data$DATAPACKAGEID,
+                     value = data$Numeric)
   
   return(data)
 }
@@ -140,9 +146,12 @@ runScraper <- function() {
   cat('Collecting current data.\n')
   data <- parseData()
   # only write data if it is a data.frame
-  if (is.data.frame(data)) writeTable(data, 'who_ebola_case_data', 'scraperwiki')
+  if (is.data.frame(data)) {
+    writeTable(data, 'who_ebola_case_data', 'scraperwiki')
+    m <- paste('Data saved on database.', nrow(data), 'records added.\n')
+    cat(m)
+  }
   else print(data)
-  cat('Done.\n')
   cat('-----------------------------\n')
 }
 
