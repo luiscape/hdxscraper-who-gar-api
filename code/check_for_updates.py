@@ -72,7 +72,7 @@ def checkForAlert(local_file):
 
     # proceed if the hash is different, i.e. update
     print "New data from the WHO. Running scraper."
-    os.sytem('~/R/bin/Rscript ~/tool/code/scraper.R')
+    os.system('~/R/bin/Rscript ~/tool/code/scraper.R')
 
 
 ###############
