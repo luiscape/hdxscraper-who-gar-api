@@ -33,7 +33,7 @@ getWHOFile <- function(date = NULL) {
 
 # Parse the WHO data into a data.frame that
 # follows the format used in HDX.
-parseData <- function(custom_date = NA) {
+parseData <- function(custom_date = NULL) {
   
   # downloading file
   file_path = getWHOFile(date = custom_date)
