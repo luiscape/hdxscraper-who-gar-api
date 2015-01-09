@@ -1,6 +1,8 @@
 ## Functions to manipulate the status of
 ## ScraperWiki boxes.
 
+library(RCurl)
+
 changeSwStatus <- function(type = NULL, message = NULL, verbose = F) {
   if (!is.null(message)) { content = paste("type=", type, "&message=", message, sep="") }
   else content = paste("type=", type, sep="")

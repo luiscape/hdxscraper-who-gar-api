@@ -139,7 +139,7 @@ runScraper <- function() {
   cat('-----------------------------\n')
   cat('Collecting current data.\n')
   data <- parseData()
-  writeTable(data, 'who_ebola_case_data', 'scraperwiki')
+  if (is.data.frame(data)) writeTable(data, 'who_ebola_case_data', 'scraperwiki')
   cat('Done.\n')
   cat('-----------------------------\n')
 }
