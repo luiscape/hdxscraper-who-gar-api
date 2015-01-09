@@ -120,11 +120,16 @@ parseData <- function(custom_date = NULL) {
 
     # if the indicator hasn't been identified,
     # use the two columns to build a new one
-    
+    df$Indicator <- ifelse(
+      is.na(df$Indicator),  # if it's still NA
+      paste(df$EBOLA_MEASURE, df$CASE_DEFINITION),
+      df$Indicator
+    )
+
     ## Two groups missing:
     # - number of cases in the last 21 days
     # - proportion of new cases of the last 21 days
-    
+
     df$EBOLA_MEASURE <- NULL
     df$CASE_DEFINITION <- NULL
 

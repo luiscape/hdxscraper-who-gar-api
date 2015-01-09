@@ -72,7 +72,7 @@ def checkForAlert(local_file):
 
     # proceed if the hash is different, i.e. update
     print "New data from the WHO. Running scraper."
-    # os.sytem('~/R/bin/Rscript ~/tool/code/scraper.R')
+    os.sytem('~/R/bin/Rscript ~/tool/code/scraper.R')
 
 
 ###############
@@ -89,10 +89,11 @@ def runEverything(p):
 try:
     runEverything(PATH)
     # if everything ok
-    print "Everything seems to be just fine."
+    print "ScraperWiki status: SUCCESS"
     scraperwiki.status('ok')
 
 except Exception as e:
+    print "ScraperWiki status: ERROR"
     print e
     scraperwiki.status('error', 'Check for new files failed.')
     os.system("mail -s 'WHO File Check just failed: unknown error..' luiscape@gmail.com")
