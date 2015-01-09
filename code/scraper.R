@@ -159,14 +159,14 @@ runScraper <- function() {
 runScraper()
 
 # Changing the status of SW.
-# tryCatch(runScraper(),
-#          error = function(e) {
-#            cat('Error detected ... sending notification.')
-#            system('mail -s "WHO Ebola figures failed." luiscape@gmail.com')
-#            changeSwStatus(type = "error", message = "Scraper failed.")
-#            { stop("!!") }
-#          }
-# )
-# 
-# # If success:
-# changeSwStatus(type = 'ok')
+tryCatch(runScraper(),
+         error = function(e) {
+           cat('Error detected ... sending notification.')
+           system('mail -s "WHO Ebola figures failed." luiscape@gmail.com')
+           changeSwStatus(type = "error", message = "Scraper failed.")
+           { stop("!!") }
+         }
+)
+
+# If success:
+changeSwStatus(type = 'ok')
