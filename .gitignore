@@ -1,5 +1,5 @@
 .RData
 .Rhistory
-*.sqlite
+scraperwiki.sqlite
 venv/*
 venv/**
