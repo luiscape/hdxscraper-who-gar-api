@@ -117,6 +117,9 @@ parseData <- function(custom_date = NULL) {
       'Cumulative number of confirmed, probable and suspected Ebola deaths',
       df$Indicator
     )
+
+    # if the indicator hasn't been identified,
+    # use the two columns to build a new one
     
     ## Two groups missing:
     # - number of cases in the last 21 days
@@ -154,9 +157,6 @@ runScraper <- function() {
   else print(data)
   cat('-----------------------------\n')
 }
-
-# Scraperwiki error handler.
-runScraper()
 
 # Changing the status of SW.
 tryCatch(runScraper(),

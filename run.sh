@@ -1,3 +1,4 @@
 #!/bin/bash
 
-~/R/bin/Rscript ~/tool/code/scraper.R
+source venv/bin/activate
+python tool/code/check_for_updates.py
