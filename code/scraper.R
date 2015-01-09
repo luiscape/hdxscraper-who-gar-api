@@ -139,7 +139,9 @@ runScraper <- function() {
   cat('-----------------------------\n')
   cat('Collecting current data.\n')
   data <- parseData()
+  # only write data if it is a data.frame
   if (is.data.frame(data)) writeTable(data, 'who_ebola_case_data', 'scraperwiki')
+  else print(data)
   cat('Done.\n')
   cat('-----------------------------\n')
 }
