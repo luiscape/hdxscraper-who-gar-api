@@ -81,7 +81,7 @@ def checkForAlert(local_file):
 
 # wrapper call for all functions
 def runEverything(p):
-    downloadFile(p,date="2015-01-09")
+    downloadFile(p)
     checkForAlert(p)
 
 
