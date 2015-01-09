@@ -145,6 +145,9 @@ parseData <- function(custom_date = NULL) {
                      Date = data$DATAPACKAGEID,
                      value = data$Numeric)
   
+  # Cleaning the final NA records
+  data <- data[!is.na(data$value),]
+
   return(data)
 }
 
