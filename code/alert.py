@@ -8,32 +8,50 @@ import hashlib
 import scraperwiki
 import shutil
 import lxml.html
-import time
+import pushbullet
 
 ###################
 ## Configuration ##
 ###################
 
-PATH = 'tool/data/hash_temp.csv'
+pushbullet_key = 'XXX'
+PATH = 'tool/data/file.txt'
 
+# For sitreps
+#XPATH = '//*[@id="content"]/table/tr[1]/td[1]/div/div/ul/li[1]/a/@href'
+#WHO = "http://apps.who.int/gho/data/node.ebola-sitrep.quick-downloads?lang=en"
+
+# For data
+XPATH = '//*[@id="content"]/table/tr[1]/td[1]/div/div/ul/li[1]/a/@href'
+WHO = 'http://apps.who.int/gho/data/node.ebola-sitrep.ebola-summary?lang=en'
+payload = {"type": "link", "title": "WHO updated EVD data", "body": "WHO just updated the Ebola data.", "url": WHO, "channel_tag": "hdx-alerts"}
 
 ###############
 ## Functions ##
 ###############
 
+def grabLink(XPATH):
+    connection = urllib.urlopen(WHO)
+    doc =  lxml.html.fromstring(connection.read())
+    href = doc.xpath(XPATH)
+
+    # for data page
+    file_link = 'http://apps.who.int/gho/data/' + href[0]
+
+    # for sitrep page
+    # csv_link = 'http://apps.who.int/gho' + href[0].replace("..", "")  # the link needs a little fixing
+
+    return file_link
+
+
 # function to download page from
 # the web and pipe it locally
-def downloadFile(local_file, date=False):
-    # for custom dates
-    if (date==False):
-        date = time.strftime("%Y-%m-%d")
-
-    # if no custom date is provided, use today's date
-    date_url = 'http://apps.who.int/gho/athena/xmart/data-coded.csv?target=EBOLA_MEASURE/CASES,DEATHS&filter=COUNTRY:GIN;COUNTRY:UNSPECIFIED;COUNTRY:LBR;COUNTRY:UNSPECIFIED;COUNTRY:MLI;COUNTRY:UNSPECIFIED;COUNTRY:GBR;COUNTRY:UNSPECIFIED;COUNTRY:SLE;COUNTRY:UNSPECIFIED;LOCATION:-;DATAPACKAGEID:' + date + ';INDICATOR_TYPE:SITREP_CUMULATIVE;INDICATOR_TYPE:SITREP_CUMULATIVE_21_DAYS;SEX:-'
-
+def downloadFile(local_file):
+    # fetching url
+    url = grabLink(XPATH)
 
     # downloading file
-    response = requests.get(date_url, stream=True)
+    response = requests.get(url, stream=True)
     with open(local_file, 'wb') as out_file:
         shutil.copyfileobj(response.raw, out_file)
     del response
@@ -43,7 +61,6 @@ def downloadFile(local_file, date=False):
 # if they differ. If this function returns true,
 # then the datastore is created.
 def checkNewData(local_file):
-
     hasher = hashlib.sha1()
     with open(local_file, 'rb') as afile:
         buf = afile.read()
@@ -59,8 +76,6 @@ def checkNewData(local_file):
     # returning a boolean
     return new_data
 
-
-# Action to be taken.
 def checkForAlert(local_file):
     # Checking if there is new data
     # pass True to the first_run parameter
@@ -71,8 +86,9 @@ def checkForAlert(local_file):
         return
 
     # proceed if the hash is different, i.e. update
-    print "New data from the WHO. Running scraper."
-    os.system('bash tool/run_scraper.sh')
+    print "New data from the WHO. Send alert + grab data."
+    pushbullet.sendAlert(pushbullet_key, payload)
+    os.system('bash tool/run_scraper.sh')  # run the scraper
 
 
 ###############
@@ -89,11 +105,10 @@ def runEverything(p):
 try:
     runEverything(PATH)
     # if everything ok
-    print "ScraperWiki status: SUCCESS"
+    print "Everything seems to be just fine."
     scraperwiki.status('ok')
 
 except Exception as e:
-    print "ScraperWiki status: ERROR"
     print e
     scraperwiki.status('error', 'Check for new files failed.')
-    os.system("mail -s 'WHO File Check just failed: unknown error..' luiscape@gmail.com")
+    os.system("mail -s 'WHO Alert failed: unknown error..' luiscape@gmail.com")

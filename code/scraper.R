@@ -3,10 +3,9 @@
 
 # Dependencies
 library(RCurl)
-# library(rjson)  # may not need it
 
 # SW helper function
-onSw <- function(d = T, l = "tool/") {
+onSw <- function(d = F, l = "tool/") {
   if (d) return(l)
   else return("")
 }
