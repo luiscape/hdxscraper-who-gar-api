@@ -51,7 +51,6 @@ parseData <- function(custom_date = NULL) {
   data$Display.Value <- NULL
   data$Low <- NULL
   data$High <- NULL
-  data$INDICATOR_TYPE <- NULL
   data$Comments <- NULL
   data <- subset(data, data$COUNTRY != "UNSPECIFIED")
   data$CASE_DEFINITION <- ifelse(data$CASE_DEFINITION == "", NA, data$CASE_DEFINITION)
@@ -69,46 +68,92 @@ parseData <- function(custom_date = NULL) {
     df$Indicator <- NA
     
     ## Creating conditions for each indicator
+    # Cases 21 Days
+    df$Indicator <- ifelse(
+      df$EBOLA_MEASURE == 'CASES' & 
+        df$CASE_DEFINITION == 'CONFIRMED' &
+        df$INDICATOR_TYPE == 'SITREP_CUMULATIVE_21_DAYS',
+      'Number of confirmed Ebola cases in the last 21 days',
+      df$Indicator
+    )
+    df$Indicator <- ifelse(
+      df$EBOLA_MEASURE == 'CASES' & 
+        df$CASE_DEFINITION == 'PROBABLE' &
+        df$INDICATOR_TYPE == 'SITREP_CUMULATIVE_21_DAYS',
+      'Number of probable Ebola cases in the last 21 days',
+      df$Indicator
+    )
+    df$Indicator <- ifelse(
+      df$EBOLA_MEASURE == 'CASES' & 
+        df$CASE_DEFINITION == 'SUSPECTED' &
+        df$INDICATOR_TYPE == 'SITREP_CUMULATIVE_21_DAYS',
+      'Number of suspected Ebola cases in the last 21 days',
+      df$Indicator
+    )
+    df$Indicator <- ifelse(
+      df$EBOLA_MEASURE == 'CASES' & 
+        df$CASE_DEFINITION == 'CONF_PROB_SUSP' &
+        df$INDICATOR_TYPE == 'SITREP_CUMULATIVE_21_DAYS',
+      'Number of confirmed, probable and suspected Ebola cases in the last 21 days',
+      df$Indicator
+    )
+    
     # Cases
     df$Indicator <- ifelse(
-      df$EBOLA_MEASURE == 'CASES' & df$CASE_DEFINITION == 'CONFIRMED',
+      df$EBOLA_MEASURE == 'CASES' & 
+        df$CASE_DEFINITION == 'CONFIRMED' &
+        df$INDICATOR_TYPE == 'SITREP_CUMULATIVE',
       'Cumulative number of confirmed Ebola cases',
       df$Indicator
     )
     df$Indicator <- ifelse(
-      df$EBOLA_MEASURE == 'CASES' & df$CASE_DEFINITION == 'PROBABLE',
+      df$EBOLA_MEASURE == 'CASES' & 
+        df$CASE_DEFINITION == 'PROBABLE' &
+        df$INDICATOR_TYPE == 'SITREP_CUMULATIVE',
       'Cumulative number of probable Ebola cases',
       df$Indicator
     )
     df$Indicator <- ifelse(
-      df$EBOLA_MEASURE == 'CASES' & df$CASE_DEFINITION == 'SUSPECTED',
+      df$EBOLA_MEASURE == 'CASES' & 
+        df$CASE_DEFINITION == 'SUSPECTED' &
+        df$INDICATOR_TYPE == 'SITREP_CUMULATIVE',
       'Cumulative number of suspected Ebola cases',
       df$Indicator
     )
     df$Indicator <- ifelse(
-      df$EBOLA_MEASURE == 'CASES' & df$CASE_DEFINITION == 'CONF_PROB_SUSP',
+      df$EBOLA_MEASURE == 'CASES' & 
+        df$CASE_DEFINITION == 'CONF_PROB_SUSP' &
+        df$INDICATOR_TYPE == 'SITREP_CUMULATIVE',
       'Cumulative number of confirmed, probable and suspected Ebola cases',
       df$Indicator
     )
     
     # Deaths
     df$Indicator <- ifelse(
-      df$EBOLA_MEASURE == 'DEATHS' & df$CASE_DEFINITION == 'CONFIRMED',
+      df$EBOLA_MEASURE == 'DEATHS' & 
+        df$CASE_DEFINITION == 'CONFIRMED' &
+        df$INDICATOR_TYPE == 'SITREP_CUMULATIVE',
       'Cumulative number of confirmed Ebola deaths',
       df$Indicator
     )
     df$Indicator <- ifelse(
-      df$EBOLA_MEASURE == 'DEATHS' & df$CASE_DEFINITION == 'PROBABLE',
+      df$EBOLA_MEASURE == 'DEATHS' & 
+        df$CASE_DEFINITION == 'PROBABLE' &
+        df$INDICATOR_TYPE == 'SITREP_CUMULATIVE',
       'Cumulative number of probable Ebola deaths',
       df$Indicator
     )
     df$Indicator <- ifelse(
-      df$EBOLA_MEASURE == 'DEATHS' & df$CASE_DEFINITION == 'SUSPECTED',
+      df$EBOLA_MEASURE == 'DEATHS' & 
+        df$CASE_DEFINITION == 'SUSPECTED' &
+        df$INDICATOR_TYPE == 'SITREP_CUMULATIVE',
       'Cumulative number of suspected Ebola deaths',
       df$Indicator
     )
     df$Indicator <- ifelse(
-      df$EBOLA_MEASURE == 'DEATHS' & df$CASE_DEFINITION == 'CONF_PROB_SUSP',
+      df$EBOLA_MEASURE == 'DEATHS' & 
+        df$CASE_DEFINITION == 'CONF_PROB_SUSP' &
+        df$INDICATOR_TYPE == 'SITREP_CUMULATIVE',
       'Cumulative number of confirmed, probable and suspected Ebola deaths',
       df$Indicator
     )
@@ -116,20 +161,18 @@ parseData <- function(custom_date = NULL) {
     ## Exceptions
     #  If the case definition is NA, but the measure is 'Deaths' it's a total.
     df$Indicator <- ifelse(
-      df$EBOLA_MEASURE == 'DEATHS' & is.na(df$CASE_DEFINITION),  # exception
+      df$EBOLA_MEASURE == 'DEATHS' & 
+        is.na(df$CASE_DEFINITION)  &
+        df$INDICATOR_TYPE == 'SITREP_CUMULATIVE',  # exception
       'Cumulative number of confirmed, probable and suspected Ebola deaths',
       df$Indicator
     )
-    
-    ## Two groups missing:
-    # - number of cases in the last 21 days
-    # - proportion of new cases of the last 21 days
     
     # if the indicator hasn't been identified,
     # use the two columns to build a new one
     df$Indicator <- ifelse(
       is.na(df$Indicator),  # if it's still NA
-      paste(df$EBOLA_MEASURE, df$CASE_DEFINITION),
+      paste(df$EBOLA_MEASURE, df$CASE_DEFINITION, df$INDICATOR_TYPE),
       df$Indicator
     )
     
@@ -143,19 +186,24 @@ parseData <- function(custom_date = NULL) {
                          DATAPACKAGEID = d$DATAPACKAGEID[1],
                          Numeric = sum(country_sub$Numeric, na.rm = TRUE),
                          EBOLA_MEASURE = NA,
-                         CASE_DEFINITION = NA)
+                         CASE_DEFINITION = NA,
+                         INDICATOR_TYPE = NA)
         if(i == 1) out <- it
         else out <- rbind(out,it)
       }
       return(out)
     }
 
+    # adding exception data to output
     exceptions_data <- aggregateExceptions(df)
     data <- rbind(df, exceptions_data)
 
+    # cleaning the indicator type columns
     data$EBOLA_MEASURE <- NULL
     data$CASE_DEFINITION <- NULL
+    data$INDICATOR_TYPE <- NULL
 
+    # return output
     return(data)
   }
   
@@ -239,7 +287,7 @@ checkData <- function(df = NULL) {
 runScraper <- function() {
   cat('-----------------------------\n')
   cat('Collecting current data.\n')
-  data <- parseData(custom_date = NULL)  # add custom date here (run once!)
+  data <- parseData(custom_date = "2015-01-14")  # add custom date here (run once!)
   checkData(data)
   # only write data if it is a data.frame
   if (is.data.frame(data)) {
