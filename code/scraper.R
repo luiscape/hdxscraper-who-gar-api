@@ -3,9 +3,10 @@
 
 # Dependencies
 library(RCurl)
+library(sqldf)
 
 # SW helper function
-onSw <- function(d = F, l = "tool/") {
+onSw <- function(d = T, l = "tool/") {
   if (d) return(l)
   else return("")
 }
@@ -111,12 +112,19 @@ parseData <- function(custom_date = NULL) {
       'Cumulative number of confirmed, probable and suspected Ebola deaths',
       df$Indicator
     )
+    
+    ## Exceptions
+    #  If the case definition is NA, but the measure is 'Deaths' it's a total.
     df$Indicator <- ifelse(
       df$EBOLA_MEASURE == 'DEATHS' & is.na(df$CASE_DEFINITION),  # exception
       'Cumulative number of confirmed, probable and suspected Ebola deaths',
       df$Indicator
     )
-
+    
+    ## Two groups missing:
+    # - number of cases in the last 21 days
+    # - proportion of new cases of the last 21 days
+    
     # if the indicator hasn't been identified,
     # use the two columns to build a new one
     df$Indicator <- ifelse(
@@ -124,15 +132,31 @@ parseData <- function(custom_date = NULL) {
       paste(df$EBOLA_MEASURE, df$CASE_DEFINITION),
       df$Indicator
     )
+    
+    # Aggregating case data for exceptions.
+    aggregateExceptions <- function(d=NULL, exceptions = c('Mali', 'United Kingdom')) {
+      sub <- d[d$EBOLA_MEASURE == 'CASES',]
+      for (i in 1:length(exceptions)) {
+        country_sub <- sub[sub$COUNTRY == exceptions[i],]
+        it <- data.frame(Indicator = "Cumulative number of confirmed, probable and suspected Ebola cases",
+                         COUNTRY = exceptions[i],
+                         DATAPACKAGEID = d$DATAPACKAGEID[1],
+                         Numeric = sum(country_sub$Numeric, na.rm = TRUE),
+                         EBOLA_MEASURE = NA,
+                         CASE_DEFINITION = NA)
+        if(i == 1) out <- it
+        else out <- rbind(out,it)
+      }
+      return(out)
+    }
 
-    ## Two groups missing:
-    # - number of cases in the last 21 days
-    # - proportion of new cases of the last 21 days
+    exceptions_data <- aggregateExceptions(df)
+    data <- rbind(df, exceptions_data)
 
-    df$EBOLA_MEASURE <- NULL
-    df$CASE_DEFINITION <- NULL
+    data$EBOLA_MEASURE <- NULL
+    data$CASE_DEFINITION <- NULL
 
-    return(df)
+    return(data)
   }
   
   data <- createIndicators()
@@ -144,17 +168,79 @@ parseData <- function(custom_date = NULL) {
                      Date = data$DATAPACKAGEID,
                      value = data$Numeric)
   
-  # Cleaning the final NA records
+  # Removing those records that still have NAs
   data <- data[!is.na(data$value),]
+  
+  # check the database for all the values
+  # so you can add values based on the latest
+  # observation for each country: Sierra Leone, USA, and Spain
+  fetchLegacyDataAndInput <- function(db = NULL, table_name = NULL, custom_date = NULL) {
+    
+    ##############
+    ### Config ###
+    ##############
+    countries = c('Spain', 'United States of America', 'Senegal', 'Nigeria')
+    
+    # fetching data from db
+    db_name <- paste0(db, ".sqlite")
+    db <- dbConnect(SQLite(), dbname = db_name)
+    all_data <- dbReadTable(db, table_name)
+    dbDisconnect(db)
+    
+    # adding data
+    country_data <- all_data[all_data$Country %in% countries,]
+    country_data <- country_data[country_data$Date == as.character(max(as.Date(country_data$Date))),]
+    if (is.null(custom_date)) date <- as.character(Sys.Date())
+    country_data$Date <- date
+    
+    return(country_data)
+  }
+  
+  # merging that 
+  country_data <- fetchLegacyDataAndInput('scraperwiki', 'who_ebola_case_data')
+  output <- rbind(data, country_data)
 
-  return(data)
+  return(output)
+}
+
+# series of tests to check data integrity
+# these tests only check for values in the new data
+# not in the legacy dataset in the db
+checkData <- function(df = NULL) {
+  
+  cat('-------------------------------\n')
+  cat('Running tests:\n')
+  cat('-------------------------------\n')
+  
+  ##############
+  ### Config ###
+  ##############
+  n_countries = 9
+  
+  ######################
+  ### Test Variables ###
+  ######################
+  n_indicators_cases = as.numeric(summary(df$Indicator == 'Cumulative number of confirmed, probable and suspected Ebola cases')[3])
+  n_indicators_deaths = as.numeric(summary(df$Indicator == 'Cumulative number of confirmed, probable and suspected Ebola deaths')[3])
+  
+  if (is.null(df)) stop("No data provided.")  # sanity check
+  if (length(unique(df$Country)) != n_countries) cat("Error: Wrong number of countries.\n")  # checking for the right number of countries
+  else cat('Success: Correct number of countries.\n')
+  if (n_indicators_cases != n_countries) cat("Error: Some total cases indicators are missing.\n")  # checking for total cases indicators
+  else cat('Success: Correct number of total cases indicators.\n')
+  if (n_indicators_deaths != n_countries) cat("Error: Some total deaths indicators are missing.\n")  # checking for total deaths indicators
+  else cat('Success: Correct number of total deaths indicators.\n')
+  
+  
+  cat('-------------------------------\n')
 }
 
 # Scraper wrapper
 runScraper <- function() {
   cat('-----------------------------\n')
   cat('Collecting current data.\n')
-  data <- parseData()
+  data <- parseData(custom_date = NULL)  # add custom date here (run once!)
+  checkData(data)
   # only write data if it is a data.frame
   if (is.data.frame(data)) {
     writeTable(data, 'who_ebola_case_data', 'scraperwiki')
