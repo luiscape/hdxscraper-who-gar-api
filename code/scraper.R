@@ -174,7 +174,7 @@ parseData <- function(custom_date = NULL) {
   # check the database for all the values
   # so you can add values based on the latest
   # observation for each country: Sierra Leone, USA, and Spain
-  fetchLegacyDataAndInput <- function(db = NULL, table_name = NULL, custom_date = NULL) {
+  fetchLegacyDataAndInput <- function(db = NULL, table_name = NULL, date = NULL) {
     
     ##############
     ### Config ###
@@ -197,7 +197,7 @@ parseData <- function(custom_date = NULL) {
   }
   
   # merging that 
-  country_data <- fetchLegacyDataAndInput('scraperwiki', 'who_ebola_case_data')
+  country_data <- fetchLegacyDataAndInput('scraperwiki', 'who_ebola_case_data', custom_date)
   output <- rbind(data, country_data)
 
   return(output)
