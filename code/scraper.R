@@ -1,6 +1,9 @@
 ## Script to download data from the WHO, 
 ## parse it, and store it in a database.
 
+# Configuration: passing args via command line.
+args <- commandArgs(T)
+
 # Dependencies
 library(RCurl)
 library(sqldf)
@@ -20,7 +23,8 @@ source(paste0(onSw(), 'code/sw_status.R'))
 getWHOFile <- function(date = NULL) {
   # building url using the current date
   if (is.null(date)) date <- Sys.Date()
-  date_url <- paste0('http://apps.who.int/gho/athena/xmart/data-coded.csv?target=EBOLA_MEASURE/CASES,DEATHS&filter=COUNTRY:GIN;COUNTRY:UNSPECIFIED;COUNTRY:LBR;COUNTRY:UNSPECIFIED;COUNTRY:MLI;COUNTRY:UNSPECIFIED;COUNTRY:GBR;COUNTRY:UNSPECIFIED;COUNTRY:SLE;COUNTRY:UNSPECIFIED;LOCATION:-;DATAPACKAGEID:', date, ';INDICATOR_TYPE:SITREP_CUMULATIVE;INDICATOR_TYPE:SITREP_CUMULATIVE_21_DAYS;SEX:-')
+  if (is.na(date)) date <- Sys.Date()  # if command line argument is not provided
+  date_url <- paste0('http://apps.who.int/gho/athena/xmart/data-coded.csv?target=EBOLA_MEASURE/CASES,DEATHS&filter=COUNTRY:GIN;COUNTRY:UNSPECIFIED;COUNTRY:LBR;COUNTRY:UNSPECIFIED;COUNTRY:MLI;COUNTRY:UNSPECIFIED;COUNTRY:GBR;COUNTRY:UNSPECIFIED;COUNTRY:SLE;COUNTRY:UNSPECIFIED;LOCATION:-;INDICATOR_TYPE:SITREP_CUMULATIVE;INDICATOR_TYPE:SITREP_CUMULATIVE_21_DAYS;SEX:-;DATAPACKAGEID:', date)
   
   # downloading the resulting file in a local
   # temporary csv file
@@ -239,6 +243,7 @@ parseData <- function(custom_date = NULL) {
     country_data <- all_data[all_data$Country %in% countries,]
     country_data <- country_data[country_data$Date == as.character(max(as.Date(country_data$Date))),]
     if (is.null(custom_date)) date <- as.character(Sys.Date())
+    if (is.na(custom_date)) date <- as.character(Sys.Date())  # if args are not provided
     country_data$Date <- date
     
     return(country_data)
@@ -278,8 +283,8 @@ checkData <- function(df = NULL) {
   else cat('Success: Correct number of total cases indicators.\n')
   if (n_indicators_deaths != n_countries) cat("Error: Some total deaths indicators are missing.\n")  # checking for total deaths indicators
   else cat('Success: Correct number of total deaths indicators.\n')
-  
-  
+
+
   cat('-------------------------------\n')
 }
 
@@ -287,7 +292,7 @@ checkData <- function(df = NULL) {
 runScraper <- function() {
   cat('-----------------------------\n')
   cat('Collecting current data.\n')
-  data <- parseData(custom_date = "2015-01-14")  # add custom date here (run once!)
+  data <- parseData(args[1])  # add custom date here (run once!)
   checkData(data)
   # only write data if it is a data.frame
   if (is.data.frame(data)) {
