@@ -6,7 +6,7 @@ library(RCurl)
 library(sqldf)
 
 # SW helper function
-onSw <- function(d = F, l = "tool/") {
+onSw <- function(d = T, l = "tool/") {
   if (d) return(l)
   else return("")
 }
