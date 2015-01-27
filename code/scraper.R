@@ -291,7 +291,7 @@ parseData <- function(custom_date = NULL) {
 ############################################
 ############################################
 
-Scraper wrapper
+# Scraper wrapper
 runScraper <- function() {
   cat('-----------------------------\n')
   cat('Collecting current data.\n')
