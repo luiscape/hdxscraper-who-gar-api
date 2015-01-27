@@ -49,12 +49,12 @@ def checkHash(filename, first_run):
     # checking if the files are identical or if
     # they have changed
     if first_run:
-        scraperwiki.sqlite.save_var('hash', new_hash)
+        scraperwiki.sqlite.save_var('datastore', new_hash)
         new_data = False
 
     else:
-        old_hash = scraperwiki.sqlite.get_var('hash')
-        scraperwiki.sqlite.save_var('hash', new_hash)
+        old_hash = scraperwiki.sqlite.get_var('datastore')
+        scraperwiki.sqlite.save_var('datastore', new_hash)
         new_data = old_hash != new_hash
 
     # returning a boolean

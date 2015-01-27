@@ -69,8 +69,8 @@ def checkNewData(local_file):
 
         # checking if the files are identical or if
         # they have changed
-        old_hash = scraperwiki.sqlite.get_var('hash')
-        scraperwiki.sqlite.save_var('hash', new_hash)
+        old_hash = scraperwiki.sqlite.get_var('alert')
+        scraperwiki.sqlite.save_var('alert', new_hash)
         new_data = old_hash != new_hash
 
     # returning a boolean
