@@ -1,15 +1,12 @@
 ## Script to download data from the WHO, 
 ## parse it, and store it in a database.
 
-# Configuration: passing args via command line.
-args <- commandArgs(T)
-
 # Dependencies
 library(RCurl)
 library(sqldf)
 
 # SW helper function
-onSw <- function(d = T, l = "tool/") {
+onSw <- function(d = F, l = "tool/") {
   if (d) return(l)
   else return("")
 }
@@ -19,13 +16,30 @@ source(paste0(onSw(), 'code/write_tables.R'))
 source(paste0(onSw(), 'code/test.R'))
 source(paste0(onSw(), 'code/sw_status.R'))
 
+############################################
+############################################
+########## Script Configuration ############
+############################################
+############################################
+
+countries_legacy = c('Spain', 'United States of America', 'Senegal', 'Nigeria', 'Mali')  # Legacy countries.
+countries_exceptional = c('United Kingdom')  # Countries without intense transmission.
+args <- commandArgs(T)  # Used to fetch the date from the command line.
+
+
+############################################
+############################################
+############# Program Logic ################
+############################################
+############################################
+
 # Function to query the WHO API and download
 # the file locally.
 getWHOFile <- function(date = NULL) {
   # building url using the current date
   if (is.null(date)) date <- Sys.Date()
   if (is.na(date)) date <- Sys.Date()  # if command line argument is not provided
-  date_url <- paste0('http://apps.who.int/gho/athena/xmart/data-coded.csv?target=EBOLA_MEASURE/CASES,DEATHS&filter=COUNTRY:GIN;COUNTRY:UNSPECIFIED;COUNTRY:LBR;COUNTRY:UNSPECIFIED;COUNTRY:MLI;COUNTRY:UNSPECIFIED;COUNTRY:GBR;COUNTRY:UNSPECIFIED;COUNTRY:SLE;COUNTRY:UNSPECIFIED;LOCATION:-;INDICATOR_TYPE:SITREP_CUMULATIVE;INDICATOR_TYPE:SITREP_CUMULATIVE_21_DAYS;SEX:-;DATAPACKAGEID:', date)
+  date_url <- paste0('http://apps.who.int/gho/athena/xmart/data-coded.csv?target=EBOLA_MEASURE/CASES,DEATHS&filter=LOCATION:-;INDICATOR_TYPE:SITREP_CUMULATIVE;INDICATOR_TYPE:SITREP_CUMULATIVE_21_DAYS;SEX:-;DATAPACKAGEID:', date)
   
   # downloading the resulting file in a local
   # temporary csv file
@@ -60,14 +74,20 @@ parseData <- function(custom_date = NULL) {
   data <- subset(data, data$COUNTRY != "UNSPECIFIED")
   data$CASE_DEFINITION <- ifelse(data$CASE_DEFINITION == "", NA, data$CASE_DEFINITION)
   
-  # transforming
+  # Transforming country codes to country names.
   data$COUNTRY <- ifelse(data$COUNTRY == 'MLI', "Mali", data$COUNTRY)
   data$COUNTRY <- ifelse(data$COUNTRY == 'GBR', "United Kingdom", data$COUNTRY)
   data$COUNTRY <- ifelse(data$COUNTRY == 'LBR', "Liberia", data$COUNTRY)
   data$COUNTRY <- ifelse(data$COUNTRY == 'GIN', "Guinea", data$COUNTRY)
   data$COUNTRY <- ifelse(data$COUNTRY == 'SLE', "Sierra Leone", data$COUNTRY)
+  data$COUNTRY <- ifelse(data$COUNTRY == 'USA', "United States of America", data$COUNTRY)
+  data$COUNTRY <- ifelse(data$COUNTRY == 'ESP', "Spain", data$COUNTRY)
+  data$COUNTRY <- ifelse(data$COUNTRY == 'SEN', "Senegal", data$COUNTRY)
+  data$COUNTRY <- ifelse(data$COUNTRY == 'NGA', "Nigeria", data$COUNTRY)
   
-  # create indicators
+  # Function to transfrom the indicators from the WHO API
+  # into the indicators in HDX. Most of the work is of transforming
+  # combination of strings into a larger string to match HDX's current format.
   createIndicators <- function(df = data) {
     # creating variable
     df$Indicator <- NA
@@ -181,8 +201,10 @@ parseData <- function(custom_date = NULL) {
       df$Indicator
     )
     
-    # Aggregating case data for exceptions.
-    aggregateExceptions <- function(d=NULL, exceptions = c('Mali', 'United Kingdom')) {
+    # Aggregating case data for exceptions: looks for the case
+    # data from the exceptions, aggregates it, and creates a
+    # the total cases indicator.
+    aggregateExceptions <- function(d = NULL, exceptions = NULL) {
       sub <- d[d$EBOLA_MEASURE == 'CASES',]
       for (i in 1:length(exceptions)) {
         country_sub <- sub[sub$COUNTRY == exceptions[i],]
@@ -200,7 +222,7 @@ parseData <- function(custom_date = NULL) {
     }
 
     # adding exception data to output
-    exceptions_data <- aggregateExceptions(df)
+    exceptions_data <- aggregateExceptions(df, countries_exceptional)
     data <- rbind(df, exceptions_data)
 
     # cleaning the indicator type columns
@@ -227,21 +249,26 @@ parseData <- function(custom_date = NULL) {
   # check the database for all the values
   # so you can add values based on the latest
   # observation for each country: Sierra Leone, USA, and Spain
-  fetchLegacyDataAndInput <- function(db = NULL, table_name = NULL, date = NULL) {
-    
-    ##############
-    ### Config ###
-    ##############
-    countries = c('Spain', 'United States of America', 'Senegal', 'Nigeria')
-    
-    # fetching data from db
+  fetchLegacyDataAndInput <- function(db = NULL,
+                                      table_name = NULL,
+                                      date = NULL,
+                                      legacy_countries = NULL) {
+
+    # Fetching data fromd data base.
     db_name <- paste0(db, ".sqlite")
     db <- dbConnect(SQLite(), dbname = db_name)
-    all_data <- dbReadTable(db, table_name)
+
+    # Checking if the database exsists with
+    # historic data.
+    tryCatch(all_data <- dbReadTable(db, table_name),
+      error = function(e) {
+        dbDisconnect(db)
+        stop("No database. Run the historic.R first.")
+      })
     dbDisconnect(db)
     
     # adding data
-    country_data <- all_data[all_data$Country %in% countries,]
+    country_data <- all_data[all_data$Country %in% legacy_countries,]
     country_data <- country_data[country_data$Date == as.character(max(as.Date(country_data$Date))),]
     if (is.null(custom_date)) date <- as.character(Sys.Date())
     if (is.na(custom_date)) date <- as.character(Sys.Date())  # if args are not provided
@@ -251,37 +278,49 @@ parseData <- function(custom_date = NULL) {
   }
   
   # merging that 
-  country_data <- fetchLegacyDataAndInput('scraperwiki', 'ebola-data-db-format', custom_date)
+  country_data <- fetchLegacyDataAndInput('scraperwiki', 'ebola_data_db_format', custom_date, countries_legacy)
   output <- rbind(data, country_data)
 
   return(output)
 }
 
+
+############################################
+############################################
+########### ScraperWiki Logic ##############
+############################################
+############################################
+
+data <- parseData(args[1])  # add custom date here (run once!)
+checkData(data)
+
 # Scraper wrapper
-runScraper <- function() {
-  cat('-----------------------------\n')
-  cat('Collecting current data.\n')
-  data <- parseData(args[1])  # add custom date here (run once!)
-  checkData(data)
-  # only write data if it is a data.frame
-  if (is.data.frame(data)) {
-    writeTable(data, 'ebola-data-db-format', 'scraperwiki')
-    m <- paste('Data saved on database.', nrow(data), 'records added.\n')
-    cat(m)
-  }
-  else print(data)
-  cat('-----------------------------\n')
-}
+# runScraper <- function() {
+#   cat('-----------------------------\n')
+#   cat('Collecting current data.\n')
+#   data <- parseData(args[1])  # add custom date here (run once!)
+#   checkData(data)
+#   # The function parseData returns a string if
+#   # there isn't new data. Check if the object is a data.frame
+#   # and then proceed to writting the data in the database.
+#   if (is.data.frame(data)) {
+#     writeTable(data, 'ebola_data_db_format', 'scraperwiki')
+#     m <- paste('Data saved on database.', nrow(data), 'records added.\n')
+#     cat(m)
+#   }
+#   else print(data)
+#   cat('-----------------------------\n')
+# }
 
-# Changing the status of SW.
-tryCatch(runScraper(),
-         error = function(e) {
-           cat('Error detected ... sending notification.')
-           system('mail -s "WHO Ebola figures failed." luiscape@gmail.com')
-           changeSwStatus(type = "error", message = "Scraper failed.")
-           { stop("!!") }
-         }
-)
+# # Changing the status of SW.
+# tryCatch(runScraper(),
+#          error = function(e) {
+#            cat('Error detected ... sending notification.')
+#            system('mail -s "WHO Ebola figures failed." luiscape@gmail.com')
+#            changeSwStatus(type = "error", message = "Scraper failed.")
+#            { stop("!!") }
+#          }
+# )
 
-# If success:
-changeSwStatus(type = 'ok')
+# # If success:
+# changeSwStatus(type = 'ok')

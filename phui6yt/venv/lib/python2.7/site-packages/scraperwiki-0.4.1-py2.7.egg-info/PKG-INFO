@@ -1,0 +1,16 @@
+Metadata-Version: 1.1
+Name: scraperwiki
+Version: 0.4.1
+Summary: Local version of ScraperWiki libraries
+Home-page: https://github.com/scraperwiki/scraperwiki-python
+Author: Francis Irving
+Author-email: francis@scraperwiki.com
+License: GPL
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: SQL
+Classifier: Topic :: Database :: Front-Ends

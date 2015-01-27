@@ -1,0 +1,7 @@
+title,value,latest_date,source,source_link,notes,explore,units
+Cumulative Cases of Ebola,15935,2014-11-26,WHO,https://data.hdx.rwlabs.org/dataset/ebola-cases-2014,"It includes probable, confirmed and suspected cases",http://docs.hdx.rwlabs.org/west-africa-ebola-outbreak-visualization/,count
+Cumulative Deaths from Ebola,5689,2014-11-26,WHO,https://data.hdx.rwlabs.org/dataset/ebola-cases-2014,"It includes probable, confirmed and suspected cases",http://docs.hdx.rwlabs.org/west-africa-ebola-outbreak-visualization/,count
+Appeal Coverage,0.554,2014-11-24,OCHA FTS,https://data.hdx.rwlabs.org/dataset/fts-ebola-coverage,,http://simonbjohnson.github.io/ebola-fts-dashboard/,ratio
+People Receiving Food Aid,1572978,2014-11-19,WFP,https://data.hdx.rwlabs.org/dataset/wfp-indicators,"Data refers to people receiving food in Sierra Leone, Liberia and Guinea only",http://simonbjohnson.github.io/Ebola_Market_prices/,million
+Open Ebola Treatment Centers,22,2014-11-19,WHO,https://data.hdx.rwlabs.org/dataset/etc-overview-status,,http://www.nytimes.com/interactive/2014/07/31/world/africa/ebola-virus-outbreak-qa.html?_r=1,count
+Currently Affected Countries,6,2014-11-26,WHO,https://data.hdx.rwlabs.org/dataset/ebola-cases-2014,"Countries with an active EVD outbreak are Guinea, Liberia, Mali, Sierra Leone, Spain and the United States of America. Previously affected countries Nigeria and Senegal are not included as they have been declared ebola free by the WHO.",,count

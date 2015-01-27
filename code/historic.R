@@ -8,7 +8,7 @@ library(RCurl)
 library(rjson)
 
 # SW helper function
-onSw <- function(d = T, l = 'tool/') {
+onSw <- function(d = F, l = 'tool/') {
   if (d) return(l)
   else return("")
 }
@@ -43,7 +43,7 @@ loadHistoricData <- function() {
   cat('-----------------------------\n')
   cat('Collecting historic data.\n')
   data <- getHistoricData()
-  writeTable(data, 'ebola-data-db-format', 'scraperwiki', overwrite = T)
+  writeTable(data, 'ebola_data_db_format', 'scraperwiki', overwrite = T)
   cat('Done.\n')
   cat('-----------------------------\n')
 }
