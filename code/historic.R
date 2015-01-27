@@ -43,7 +43,7 @@ loadHistoricData <- function() {
   cat('-----------------------------\n')
   cat('Collecting historic data.\n')
   data <- getHistoricData()
-  writeTable(data, 'who_ebola_case_data', 'scraperwiki', overwrite = T)
+  writeTable(data, 'ebola-data-db-format', 'scraperwiki', overwrite = T)
   cat('Done.\n')
   cat('-----------------------------\n')
 }

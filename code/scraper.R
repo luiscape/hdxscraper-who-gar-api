@@ -16,6 +16,7 @@ onSw <- function(d = T, l = "tool/") {
 
 # Helper functions
 source(paste0(onSw(), 'code/write_tables.R'))
+source(paste0(onSw(), 'code/test.R'))
 source(paste0(onSw(), 'code/sw_status.R'))
 
 # Function to query the WHO API and download
@@ -250,42 +251,10 @@ parseData <- function(custom_date = NULL) {
   }
   
   # merging that 
-  country_data <- fetchLegacyDataAndInput('scraperwiki', 'who_ebola_case_data', custom_date)
+  country_data <- fetchLegacyDataAndInput('scraperwiki', 'ebola-data-db-format', custom_date)
   output <- rbind(data, country_data)
 
   return(output)
-}
-
-# series of tests to check data integrity
-# these tests only check for values in the new data
-# not in the legacy dataset in the db
-checkData <- function(df = NULL) {
-  
-  cat('-------------------------------\n')
-  cat('Running tests:\n')
-  cat('-------------------------------\n')
-  
-  ##############
-  ### Config ###
-  ##############
-  n_countries = 9
-  
-  ######################
-  ### Test Variables ###
-  ######################
-  n_indicators_cases = as.numeric(summary(df$Indicator == 'Cumulative number of confirmed, probable and suspected Ebola cases')[3])
-  n_indicators_deaths = as.numeric(summary(df$Indicator == 'Cumulative number of confirmed, probable and suspected Ebola deaths')[3])
-  
-  if (is.null(df)) stop("No data provided.")  # sanity check
-  if (length(unique(df$Country)) != n_countries) cat("Error: Wrong number of countries.\n")  # checking for the right number of countries
-  else cat('Success: Correct number of countries.\n')
-  if (n_indicators_cases != n_countries) cat("Error: Some total cases indicators are missing.\n")  # checking for total cases indicators
-  else cat('Success: Correct number of total cases indicators.\n')
-  if (n_indicators_deaths != n_countries) cat("Error: Some total deaths indicators are missing.\n")  # checking for total deaths indicators
-  else cat('Success: Correct number of total deaths indicators.\n')
-
-
-  cat('-------------------------------\n')
 }
 
 # Scraper wrapper
@@ -296,7 +265,7 @@ runScraper <- function() {
   checkData(data)
   # only write data if it is a data.frame
   if (is.data.frame(data)) {
-    writeTable(data, 'who_ebola_case_data', 'scraperwiki')
+    writeTable(data, 'ebola-data-db-format', 'scraperwiki')
     m <- paste('Data saved on database.', nrow(data), 'records added.\n')
     cat(m)
   }
