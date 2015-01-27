@@ -291,36 +291,33 @@ parseData <- function(custom_date = NULL) {
 ############################################
 ############################################
 
-data <- parseData(args[1])  # add custom date here (run once!)
-checkData(data)
+Scraper wrapper
+runScraper <- function() {
+  cat('-----------------------------\n')
+  cat('Collecting current data.\n')
+  data <- parseData(args[1])  # add custom date here (run once!)
+  checkData(data)
+  # The function parseData returns a string if
+  # there isn't new data. Check if the object is a data.frame
+  # and then proceed to writting the data in the database.
+  if (is.data.frame(data)) {
+    writeTable(data, 'ebola_data_db_format', 'scraperwiki')
+    m <- paste('Data saved on database.', nrow(data), 'records added.\n')
+    cat(m)
+  }
+  else print(data)
+  cat('-----------------------------\n')
+}
 
-# Scraper wrapper
-# runScraper <- function() {
-#   cat('-----------------------------\n')
-#   cat('Collecting current data.\n')
-#   data <- parseData(args[1])  # add custom date here (run once!)
-#   checkData(data)
-#   # The function parseData returns a string if
-#   # there isn't new data. Check if the object is a data.frame
-#   # and then proceed to writting the data in the database.
-#   if (is.data.frame(data)) {
-#     writeTable(data, 'ebola_data_db_format', 'scraperwiki')
-#     m <- paste('Data saved on database.', nrow(data), 'records added.\n')
-#     cat(m)
-#   }
-#   else print(data)
-#   cat('-----------------------------\n')
-# }
+# Changing the status of SW.
+tryCatch(runScraper(),
+         error = function(e) {
+           cat('Error detected ... sending notification.')
+           system('mail -s "WHO Ebola figures failed." luiscape@gmail.com')
+           changeSwStatus(type = "error", message = "Scraper failed.")
+           { stop("!!") }
+         }
+)
 
-# # Changing the status of SW.
-# tryCatch(runScraper(),
-#          error = function(e) {
-#            cat('Error detected ... sending notification.')
-#            system('mail -s "WHO Ebola figures failed." luiscape@gmail.com')
-#            changeSwStatus(type = "error", message = "Scraper failed.")
-#            { stop("!!") }
-#          }
-# )
-
-# # If success:
-# changeSwStatus(type = 'ok')
+# If success:
+changeSwStatus(type = 'ok')
