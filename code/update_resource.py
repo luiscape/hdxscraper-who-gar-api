@@ -5,7 +5,7 @@ import ckanapi
 
 def uploadResource():
 	hdx = ckanapi.RemoteCKAN('https://data.hdx.rwlabs.org',
-	    apikey='a6863277-f35e-4f50-af85-78a2d9ebcdd3',
+	    apikey='XXX',
 	    user_agent='CKAN_API/1.0')
 	try:
 		hdx.action.resource_update(

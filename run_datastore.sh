@@ -2,4 +2,4 @@
 
 # Creating / updating datastore
 source venv/bin/activate
-python ~/tool/code/create-datastore.py XXX
+python ~/tool/code/create-datastore.py XXX YYY
