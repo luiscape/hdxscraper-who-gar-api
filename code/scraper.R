@@ -13,8 +13,10 @@ onSw <- function(d = T, l = "tool/") {
 
 # Helper functions
 source(paste0(onSw(), 'code/write_tables.R'))
-source(paste0(onSw(), 'code/test.R'))
 source(paste0(onSw(), 'code/sw_status.R'))
+
+# Loading tests
+source(paste0(onSw(), 'tests/validate.R'))
 
 ############################################
 ############################################

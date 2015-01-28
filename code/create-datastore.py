@@ -35,6 +35,25 @@ def downloadResource(filename):
     except:
         print 'There was an error downlaoding the file.'
 
+def uploadResource(resource_id, apikey, p):
+    hdx = ckanapi.RemoteCKAN('https://data.hdx.rwlabs.org',
+        apikey=apikey,
+        user_agent='CKAN_API/1.0')
+    try:
+        hdx.action.resource_update(
+            id=resource_id,
+            upload=open(p),
+            format='CSV',
+            description='Ebola data in record format with indicator, country, date and value.'
+            )
+
+    except ckanapi.errors.ValidationError:
+            print 'You have missing parameters. Check the url and type are included.\n'
+
+    except ckanapi.errors.NotFound:
+            print 'Resource not found!\n'
+
+
 # Function that checks for old SHA hash
 # and stores as a SW variable the new hash
 # if they differ. If this function returns true,
@@ -134,7 +153,8 @@ def updateDatastore(filename):
             upload_data_to_datastore(resource['resource_id'], resource)
 
 def runEverything():
-    downloadResource(PATH)
+    # downloadResource(PATH)
+    uploadResource(resource_id, apikey, PATH)
     updateDatastore(PATH)
 
 
