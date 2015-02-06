@@ -27,6 +27,7 @@ source(paste0(onSw(), 'tests/validate.R'))
 countries_legacy = c('Spain', 'United States of America', 'Senegal', 'Nigeria', 'Mali')  # Legacy countries.
 countries_exceptional = c('United Kingdom')  # Countries without intense transmission.
 args <- commandArgs(T)  # Used to fetch the date from the command line.
+FILE_PATH = "tool/data/ebola-data-db-format.csv"
 
 
 ############################################
@@ -294,7 +295,7 @@ parseData <- function(custom_date = NULL) {
 ############################################
 
 # Scraper wrapper
-runScraper <- function() {
+runScraper <- function(p) {
   cat('-----------------------------\n')
   cat('Collecting current data.\n')
   data <- parseData(args[1])  # add custom date here (run once!)
@@ -306,14 +307,20 @@ runScraper <- function() {
     writeTable(data, 'ebola_data_db_format', 'scraperwiki')
     m <- paste('Data saved on database.', nrow(data), 'records added.\n')
     cat(m)
+    cat("Writing CSV ... ")
+    write.csv(data, p, row.names = F)
+    cat("done.\n")
+
   }
-  system("bash tool/run_datastore.sh")
   else print(data)
+
+  # If everything succeeds, run the datastore scripts.
+  system("bash tool/run_datastore.sh")
   cat('-----------------------------\n')
 }
 
 # Changing the status of SW.
-tryCatch(runScraper(),
+tryCatch(runScraper(FILE_PATH),
          error = function(e) {
            cat('Error detected ... sending notification.')
            system('mail -s "WHO Ebola figures failed." luiscape@gmail.com')
