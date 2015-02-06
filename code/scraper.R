@@ -307,6 +307,7 @@ runScraper <- function() {
     m <- paste('Data saved on database.', nrow(data), 'records added.\n')
     cat(m)
   }
+  system("bash tool/run_datastore.sh")
   else print(data)
   cat('-----------------------------\n')
 }
