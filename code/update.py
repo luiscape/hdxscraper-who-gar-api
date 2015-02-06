@@ -9,7 +9,7 @@
 import requests
 import shutil
 
-api_key = 'a6863277-f35e-4f50-af85-78a2d9ebcdd3'
+api_key = 'XXX'
 PATH = 'data/ebola-data-db-format.xls'
 format = "XLS"
 resource_id = 'a8b51b81-1fa7-499d-a9f2-3d0bce06b5b5'
