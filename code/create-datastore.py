@@ -23,11 +23,13 @@ ckan = None
 # Function to download a resource from CKAN.
 def downloadResource(filename):
 
+    print "Downloading file from CKAN."
+
     # querying
     url = 'https://data.hdx.rwlabs.org/api/action/resource_show?id=' + resource_id
     r = requests.get(url)
     doc = r.json()
-    fileUrl = doc["result"]["url"]
+    fileUrl = doc["result"]["perma_link"]
 
     # downloading
     try:
@@ -80,6 +82,7 @@ def checkHash(filename, first_run):
     return new_data
 
 def updateDatastore(filename):
+    print "Updating DataStore ..."
 
     # Checking if there is new data
     new_data = checkHash(filename, first_run = False)
@@ -153,8 +156,8 @@ def updateDatastore(filename):
             upload_data_to_datastore(resource['resource_id'], resource)
 
 def runEverything():
-    # downloadResource(PATH)
-    uploadResource(resource_id, apikey, PATH)
+    # uploadResource(resource_id, apikey, PATH)
+    downloadResource(PATH)
     updateDatastore(PATH)
 
 
