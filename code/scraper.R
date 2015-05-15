@@ -319,7 +319,7 @@ runScraper <- function(p) {
   # then run the datastore scripts.
   db <- dbConnect(SQLite(), dbname = 'scraperwiki.sqlite')
   stored_table <- dbReadTable(db, 'ebola_data_db_format')
-  if (nrow(stored_table[as.Date(stored_table$Date) == max(as.Date(stored_table$Date)),])) > 100 {
+  if (nrow(stored_table[as.Date(stored_table$Date) == max(as.Date(stored_table$Date)),]) > 100) {
     system("bash tool/run_datastore.sh")
   }
   cat('-----------------------------\n')
@@ -327,15 +327,15 @@ runScraper <- function(p) {
 
 runScraper(FILE_PATH)
 
-# Changing the status of SW.
-tryCatch(runScraper(FILE_PATH),
-         error = function(e) {
-           cat('Error detected ... sending notification.')
-           system('mail -s "WHO Ebola figures failed." luiscape@gmail.com')
-           changeSwStatus(type = "error", message = "Scraper failed.")
-           { stop("!!") }
-         }
-)
-
-# If success:
-changeSwStatus(type = 'ok')
+# # Changing the status of SW.
+# tryCatch(runScraper(FILE_PATH),
+#          error = function(e) {
+#            cat('Error detected ... sending notification.')
+#            system('mail -s "WHO Ebola figures failed." luiscape@gmail.com')
+#            changeSwStatus(type = "error", message = "Scraper failed.")
+#            { stop("!!") }
+#          }
+# )
+# 
+# # If success:
+# changeSwStatus(type = 'ok')
