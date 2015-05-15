@@ -318,6 +318,8 @@ runScraper <- function(p) {
   # If everything succeeds, check the consistency of the data
   # then run the datastore scripts.
   db <- dbConnect(SQLite(), dbname = 'scraperwiki.sqlite')
+  dbSendPreparedQuery(db)
+  db <- dbConnect(SQLite(), dbname = 'scraperwiki.sqlite')
   stored_table <- dbReadTable(db, 'ebola_data_db_format')
   if (nrow(stored_table[as.Date(stored_table$Date) == max(as.Date(stored_table$Date)),]) > 100) {
     system("bash tool/run_datastore.sh")
