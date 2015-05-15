@@ -24,10 +24,10 @@ source(paste0(onSw(), 'tests/validate.R'))
 ############################################
 ############################################
 
-countries_legacy = c('Spain', 'United States of America', 'Senegal', 'Nigeria', 'Mali')  # Legacy countries.
-countries_exceptional = c('United Kingdom')  # Countries without intense transmission.
+countries_legacy = c('United Kingdom', 'Spain', 'United States of America', 'Senegal', 'Nigeria', 'Mali')  # Legacy countries.
+countries_exceptional = c('Italy')  # Countries without intense transmission.
 args <- commandArgs(T)  # Used to fetch the date from the command line.
-FILE_PATH = "tool/data/ebola-data-db-format.csv"
+FILE_PATH = paste0(onSw(), "data/ebola-data-db-format.csv")
 
 
 ############################################
@@ -87,6 +87,7 @@ parseData <- function(custom_date = NULL) {
   data$COUNTRY <- ifelse(data$COUNTRY == 'ESP', "Spain", data$COUNTRY)
   data$COUNTRY <- ifelse(data$COUNTRY == 'SEN', "Senegal", data$COUNTRY)
   data$COUNTRY <- ifelse(data$COUNTRY == 'NGA', "Nigeria", data$COUNTRY)
+  data$COUNTRY <- ifelse(data$COUNTRY == 'ITA', "Italy", data$COUNTRY)
   
   # Function to transfrom the indicators from the WHO API
   # into the indicators in HDX. Most of the work is of transforming
@@ -314,10 +315,17 @@ runScraper <- function(p) {
   }
   else print(data)
 
-  # If everything succeeds, run the datastore scripts.
-  system("bash tool/run_datastore.sh")
+  # If everything succeeds, check the consistency of the data
+  # then run the datastore scripts.
+  db <- dbConnect(SQLite(), dbname = 'scraperwiki.sqlite')
+  stored_table <- dbReadTable(db, 'ebola_data_db_format')
+  if (nrow(stored_table[as.Date(stored_table$Date) == max(as.Date(stored_table$Date)),])) > 100 {
+    system("bash tool/run_datastore.sh")
+  }
   cat('-----------------------------\n')
 }
+
+runScraper(FILE_PATH)
 
 # Changing the status of SW.
 tryCatch(runScraper(FILE_PATH),
