@@ -6,3 +6,6 @@ rundatastore:
 
 historic:
 	bash bin/run_historic.sh;
+
+scraper:
+	bash bin/run_scraper.sh;
