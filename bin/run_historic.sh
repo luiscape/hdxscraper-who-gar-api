@@ -2,5 +2,6 @@
 
 #
 # Fetch historic data from HDX.
+# parameter 1: Deploy TRUE or FALSE
 #
-Rscript scripts/historic.R
+Rscript scripts/R/historic.R FALSE
