@@ -4,6 +4,7 @@
 checkData <- function(df = NULL) {
 
   if (is.null(df)) stop("No data provided.")  # sanity check
+  if (is.data.frame(df) == FALSE) stop("No data.frame provided. No data on this date from WHO.")
 
   cat('-------------------------------\n')
   cat('Running tests:\n')
