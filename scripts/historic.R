@@ -14,7 +14,7 @@ onSw <- function(d = T, l = 'tool/') {
 }
 
 # Loading other helper functions
-source(paste0(onSw(), 'code/write_tables.R'))
+source(paste0(onSw(), 'scripts/write_tables.R'))
 
 # Helper function to get a resource_id
 # from CKAN.

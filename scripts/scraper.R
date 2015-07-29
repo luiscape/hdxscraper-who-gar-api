@@ -4,16 +4,17 @@
 # Dependencies
 library(RCurl)
 library(sqldf)
+library(dplyr)
 
 # SW helper function
-onSw <- function(d = T, l = "tool/") {
+onSw <- function(d = FALSE, l = "tool/") {
   if (d) return(l)
   else return("")
 }
 
 # Helper functions
-source(paste0(onSw(), 'code/write_tables.R'))
-source(paste0(onSw(), 'code/sw_status.R'))
+source(paste0(onSw(), 'scripts/write_tables.R'))
+source(paste0(onSw(), 'scripts/sw_status.R'))
 
 # Loading tests
 source(paste0(onSw(), 'tests/validate.R'))
@@ -95,6 +96,9 @@ parseData <- function(custom_date = NULL) {
   createIndicators <- function(df = data) {
     # creating variable
     df$Indicator <- NA
+
+    # Selecting only the West Africa crisis.
+    df <- filter(df, OUTBREAK_IDENTIFIER == 'EVD_WEST_AFRICA_2014')
     
     ## Creating conditions for each indicator
     # Cases 21 Days
