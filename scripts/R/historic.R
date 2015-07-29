@@ -12,7 +12,7 @@ library(rjson)
 # Helper scripts.
 #
 source('scripts/R/helpers/deploy.R')
-source(pathDeploy('scripts/R/write_tables.R'))
+source(pathDeploy('scripts/R/helpers/write_tables.R'))
 
 #
 # Get resource URL from an
