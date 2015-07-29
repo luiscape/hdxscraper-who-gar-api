@@ -34,8 +34,8 @@ source(pathDeploy('tests/validate.R'))
 ############################################
 ############################################
 
-countries_legacy = c('United Kingdom', 'Spain', 'United States of America', 'Senegal', 'Nigeria', 'Mali')  # Legacy countries.
-countries_exceptional = c('Italy')  # Countries without intense transmission.
+countries_legacy = c('United Kingdom', 'Spain', 'United States of America', 'Senegal', 'Nigeria', 'Mali', 'Italy')  # Legacy countries.
+countries_exceptional = c()  # Countries without intense transmission.
 FILE_PATH = pathDeploy("data/ebola-data-db-format.csv")
 
 
@@ -222,6 +222,7 @@ parseData <- function(custom_date = NULL) {
     # data from the exceptions, aggregates it, and creates a
     # the total cases indicator.
     aggregateExceptions <- function(d = NULL, exceptions = NULL) {
+      if (length(countries_exceptional) == 0) return(FALSE)
       sub <- d[d$EBOLA_MEASURE == 'CASES',]
       for (i in 1:length(exceptions)) {
         country_sub <- sub[sub$COUNTRY == exceptions[i],]
@@ -241,7 +242,10 @@ parseData <- function(custom_date = NULL) {
 
     # adding exception data to output
     exceptions_data <- aggregateExceptions(df, countries_exceptional)
-    data <- rbind(df, exceptions_data)
+    
+    # Only combine datasets if there are exceptions.
+    if (exceptions_data == FALSE) data <- df
+    else data <- rbind(df, exceptions_data)
 
     # cleaning the indicator type columns
     data$EBOLA_MEASURE <- NULL
