@@ -9,3 +9,6 @@ historic:
 
 scraper:
 	bash bin/run_scraper.sh;
+
+setup:
+	bash bin/setup.sh;

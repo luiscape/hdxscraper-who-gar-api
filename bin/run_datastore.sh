@@ -2,4 +2,4 @@
 
 # Creating / updating datastore
 source venv/bin/activate
-python ~/tool/scripts/create-datastore.py XXX YYY
+python ~/tool/scripts/update_hdx/create-datastore.py XXX YYY

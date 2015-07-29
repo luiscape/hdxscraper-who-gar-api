@@ -16,3 +16,4 @@ scraperwiki==0.5.1
 six==1.9.0
 SQLAlchemy==1.0.8
 wheel==0.24.0
+lxml==3.4.1

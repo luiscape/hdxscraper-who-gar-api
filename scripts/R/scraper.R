@@ -105,9 +105,11 @@ parseData <- function(custom_date = NULL) {
     # creating variable
     df$Indicator <- NA
 
-    # Selecting only the West Africa crisis.
+    # Patching Liberia cases.
+    liberia2_data <- filter(df, OUTBREAK_IDENTIFIER == 'EVD_LIBERIA_2015')
     df <- filter(df, OUTBREAK_IDENTIFIER == 'EVD_WEST_AFRICA_2014')
-    liberia_data <- filter(df, OUTBREAK_IDENTIFIER == 'EVD_LIBERIA_2015')
+    liberia2_data$COUNTRY <- "Liberia 2"
+    df <- rbind(df, liberia2_data)
     
     ## Creating conditions for each indicator
     # Cases 21 Days

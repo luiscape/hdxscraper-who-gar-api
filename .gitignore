@@ -1,5 +1,9 @@
+venv/*
+venv/**
+
+config/*
+config/**
+
 .RData
 .Rhistory
 scraperwiki.sqlite
-venv/*
-venv/**

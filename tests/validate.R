@@ -13,7 +13,7 @@ checkData <- function(df = NULL) {
   ##############
   ### Config ###
   ##############
-  n_countries = 10
+  n_countries = 11
 
   ######################
   ### Test Variables ###

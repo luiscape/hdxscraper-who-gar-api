@@ -1,4 +1,4 @@
 #!/bin/bash
 
 source venv/bin/activate
-python scripts/alert.py
+python scripts/check_new_data/check.py
