@@ -9,12 +9,12 @@
 # Example:
 # ~/R/bin/Rscript ~/tool/code/scraper.R FALSE "2015-01-16"
 #
-Rscript scripts/R/scraper.R FALSE "2015-07-29"
+# ~/R/bin/Rscript ~/tool/code/scraper.R TRUE
 
 #
 # If a sequence of dates is needed,
 # use this.
 #
-# while read p; do
-#   Rscript scripts/R/scraper.R FALSE $p
-# done < data/missed_dates.csv
+while read p; do
+  ~/R/bin/Rscript ~/tool/code/scraper.R FALSE $p
+done < ~/tool/data/missed_dates.csv
