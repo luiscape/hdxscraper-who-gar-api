@@ -4,6 +4,7 @@ venv/**
 config/*
 config/**
 
+.DS_Store
 .RData
 .Rhistory
 scraperwiki.sqlite
