@@ -1,22 +1,32 @@
+#
 ## Script to download data from the WHO, 
 ## parse it, and store it in a database.
+#
+# Author: Luis Capelo | capelo@un.org
+#
 
-# Dependencies
 library(RCurl)
 library(sqldf)
+library(dplyr)
 
-# SW helper function
-onSw <- function(d = T, l = "tool/") {
-  if (d) return(l)
-  else return("")
+#
+# Load helper scripts.
+#
+args <- commandArgs(TRUE)
+
+pathDeploy <- function(f = NULL, l = 'tool/', d = args[1]) {
+  if (is.null(args[1])) d = FALSE
+  if (d) return(paste0(l,f))
+  else return(f)
 }
 
-# Helper functions
-source(paste0(onSw(), 'code/write_tables.R'))
-source(paste0(onSw(), 'code/sw_status.R'))
+source(pathDeploy('scripts/R/helpers/write_tables.R'))
+source(pathDeploy('scripts/R/helpers/sw_status.R'))
 
-# Loading tests
-source(paste0(onSw(), 'tests/validate.R'))
+#
+# Load tests.
+#
+source(pathDeploy('tests/validate.R'))
 
 ############################################
 ############################################
@@ -24,10 +34,9 @@ source(paste0(onSw(), 'tests/validate.R'))
 ############################################
 ############################################
 
-countries_legacy = c('United Kingdom', 'Spain', 'United States of America', 'Senegal', 'Nigeria', 'Mali')  # Legacy countries.
-countries_exceptional = c('Italy')  # Countries without intense transmission.
-args <- commandArgs(T)  # Used to fetch the date from the command line.
-FILE_PATH = paste0(onSw(), "data/ebola-data-db-format.csv")
+countries_legacy = c('United Kingdom', 'Spain', 'United States of America', 'Senegal', 'Nigeria', 'Mali', 'Italy')  # Legacy countries.
+countries_exceptional = c()  # Countries without intense transmission.
+FILE_PATH = pathDeploy("data/ebola-data-db-format.csv")
 
 
 ############################################
@@ -46,7 +55,7 @@ getWHOFile <- function(date = NULL) {
   
   # downloading the resulting file in a local
   # temporary csv file
-  file_path = paste0(onSw(), 'data/temp.csv')
+  file_path = pathDeploy('data/temp.csv')
   download.file(date_url, file_path, method = "wget", quiet = F)
   
   # return message
@@ -95,6 +104,12 @@ parseData <- function(custom_date = NULL) {
   createIndicators <- function(df = data) {
     # creating variable
     df$Indicator <- NA
+
+    # Patching Liberia cases.
+    liberia2_data <- filter(df, OUTBREAK_IDENTIFIER == 'EVD_LIBERIA_2015')
+    df <- filter(df, OUTBREAK_IDENTIFIER == 'EVD_WEST_AFRICA_2014')
+    liberia2_data$COUNTRY <- "Liberia 2"
+    df <- rbind(df, liberia2_data)
     
     ## Creating conditions for each indicator
     # Cases 21 Days
@@ -209,6 +224,7 @@ parseData <- function(custom_date = NULL) {
     # data from the exceptions, aggregates it, and creates a
     # the total cases indicator.
     aggregateExceptions <- function(d = NULL, exceptions = NULL) {
+      if (length(countries_exceptional) == 0) return(FALSE)
       sub <- d[d$EBOLA_MEASURE == 'CASES',]
       for (i in 1:length(exceptions)) {
         country_sub <- sub[sub$COUNTRY == exceptions[i],]
@@ -218,7 +234,8 @@ parseData <- function(custom_date = NULL) {
                          Numeric = sum(country_sub$Numeric, na.rm = TRUE),
                          EBOLA_MEASURE = NA,
                          CASE_DEFINITION = NA,
-                         INDICATOR_TYPE = NA)
+                         INDICATOR_TYPE = NA,
+                         OUTBREAK_IDENTIFIER = "EVD_WEST_AFRICA_2014")
         if(i == 1) out <- it
         else out <- rbind(out,it)
       }
@@ -227,7 +244,10 @@ parseData <- function(custom_date = NULL) {
 
     # adding exception data to output
     exceptions_data <- aggregateExceptions(df, countries_exceptional)
-    data <- rbind(df, exceptions_data)
+    
+    # Only combine datasets if there are exceptions.
+    if (exceptions_data == FALSE) data <- df
+    else data <- rbind(df, exceptions_data)
 
     # cleaning the indicator type columns
     data$EBOLA_MEASURE <- NULL
@@ -299,7 +319,7 @@ parseData <- function(custom_date = NULL) {
 runScraper <- function(p) {
   cat('-----------------------------\n')
   cat('Collecting current data.\n')
-  data <- parseData(args[1])  # add custom date here (run once!)
+  data <- parseData(args[2])  # add custom date here (run once!)
   checkData(data)
   # The function parseData returns a string if
   # there isn't new data. Check if the object is a data.frame
@@ -328,20 +348,42 @@ runScraper <- function(p) {
   }
 
   if (CountDataForLatestDate() > 100) {
-    system("bash tool/run_datastore.sh")
+    datastore_shell_path = pathDeploy('bin/run_datastore.sh')
+    command = paste('bash', datastore_shell_path)
+    # system(command)
   }
   cat('-----------------------------\n')
 }
 
-# Changing the status of SW.
-tryCatch(runScraper(FILE_PATH),
-         error = function(e) {
-           cat('Error detected ... sending notification.')
-           system('mail -s "WHO Ebola figures failed." luiscape@gmail.com')
-           changeSwStatus(type = "error", message = "Scraper failed.")
-           { stop("!!") }
-         }
-)
 
-# If success:
-changeSwStatus(type = 'ok')
+#
+# Wrapper.
+#
+Main = function(d=args[1]) {
+
+  #
+  # Run with notifications only if deployed.
+  #
+  if (d == FALSE) {
+    runScraper(FILE_PATH)
+  }
+
+  else {
+    # Changing the status of SW.
+    tryCatch(runScraper(FILE_PATH),
+             error = function(e) {
+               cat('Error detected ... sending notification.')
+               system('mail -s "WHO Ebola figures failed." luiscape@gmail.com')
+               changeSwStatus(type = "error", message = "Scraper failed.")
+               { stop("!!") }
+             }
+    )
+
+    # If success:
+    changeSwStatus(type = 'ok')
+  }
+
+}
+
+
+Main()

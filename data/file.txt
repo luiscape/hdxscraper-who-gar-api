@@ -1,0 +1,405 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:addthis="http://www.addthis.com/">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Ebola data and statistics</title>
+      <meta name="DC.title" content="Ebola data and statistics">
+      <meta name="DC.keywords" content="MINERVA KEYWORDS">
+      <meta name="DC.publisher" content="World Health Organization">
+      <meta name="DC.format" content="text/html">
+      <meta name="DC.source" content="WHO">
+      <meta name="DC.date.published" content="MINERVA PUBLISH DATE">
+      <meta name="DC.identifier" content="MINERVA URL TO PAGE"><script type="text/javascript">
+    var lang = "en";
+</script><link rel="shortcut icon" href="./sysmedia/media/resources/favicon.ico">
+      <link rel="apple-touch-icon" href="./sysmedia/media/resources/apple-touch-icon.png"><script type="text/javascript" src="./sysmedia/media/js/lib/jquery.js"></script><script type="text/javascript" src="./sysmedia/media/js/lib/jquery.plugins_r.js"></script><!--[if gte IE 9]><script type="text/javascript" src="./sysmedia/media/js/lib/matchMedia.js"></script><script type="text/javascript" src="./sysmedia/media/js/lib/matchMedia.addListener.js"></script><script type="text/javascript" src="./sysmedia/media/js/lib/enquire.min.js"></script><![endif]--><!--[if !IE]><!--><script type="text/javascript" src="./sysmedia/media/js/lib/enquire.min.js"></script><!--><![endif]--><script type="text/javascript" src="./sysmedia/media/js/lib/owl.carousel.js"></script><script type="text/javascript" src="./sysmedia/media/js/who.js"></script><script type="text/javascript" src="./sysmedia/media/js/responsive.js"></script><link href="./sysmedia/media/style/who_responsive.css" rel="stylesheet" type="text/css"><!--[if IE]>
+      <link href="./sysmedia/media/style/css/patches/patch_ie_r.css" rel="stylesheet" type="text/css"><![endif]--><!--[if IE 7]>
+      <link href="./sysmedia/media/style/css/patches/patch_ie_7_r.css" rel="stylesheet" type="text/css"><![endif]--><!--[if IE 6]>
+      <link href="./sysmedia/media/style/css/patches/patch_ie_6_r.css" rel="stylesheet" type="text/css"><![endif]--><!--[if IE 7]>
+      <link href="./sysmedia/media/style/css/screen/responsive-ie-fix.css" rel="stylesheet" type="text/css"><![endif]--><!--[if IE 8]>
+      <link href="./sysmedia/media/style/css/screen/responsive-ie-fix.css" rel="stylesheet" type="text/css"><![endif]-->
+      <link rel="stylesheet" type="text/css" href="./sysmedia/media/style/css/language/lang_en_r.css"><script type="text/javascript" src="./sysmedia/media/js/infiniteCarousel.js"></script><link rel="stylesheet" type="text/css" href="./sysmedia/scripts/shadowbox/en/shadowbox.css"><script type="text/javascript" src="./sysmedia/scripts/shadowbox/en/shadowbox.js"></script><script type="text/javascript">
+//
+        Shadowbox.init({
+          //troubleElements: ["select", "object", "embed", "canvas"],viewportPadding: 20,
+          //flashVersion: 9.0.0,counterLimit: 20, displayCounter: true, displayNav: true, enableKeys: true,
+          //modal: true, fadeDuration:0.35, handleUnsupported:: link, initialHeight: , initialWidth: , onChange: ,
+          // onClose , onFinish, onOpen, overlayColor: #000,
+          animate : true,
+          animateFade:true,
+          animSequence: "sync",
+          continuous: true,
+          counterType: "skip",
+          handleOversize: "drag",
+          modal: false,
+          overlayOpacity: 0.8,
+          showOverlay: true,
+          resizeDuration: 0.50,
+          showMovieControls: false,
+          slideshowDelay: 0,
+          displayNav: true
+    });
+    //
+    </script><script type="text/javascript">
+    function resizeMe (i)
+    {
+      var h = 0;
+      try {
+        h = i.contentWindow.document.body.scrollHeight;
+      } catch (err) {
+        h = 675;
+      }
+      i.style.height = h + "px";
+    }
+
+    window.onresize = function() { 
+      var i = document.getElementById("content_iframe");
+      resizeMe(i);
+    }
+
+    function sendFeedback ()
+    {
+      feedbackURL = "mailto:gho_info@who.int?subject=Comment on Situation summaryData published on 29 July 2015&body=" + window.location.href;
+      window.open(feedbackURL);
+    }
+  </script></head>
+   <body class="main-site">
+      <div id="page" class="template_sidebar">
+         <div id="wrapper">
+            <div id="header">
+               <div id="skip"><a href="#content">Skip to main content</a></div>
+               <div id="branding"><a linkindex="0" href="/en/" title="WHO | World Health Organization" style="width: 211px; background-image: url(sysmedia/media/resources/who-logo-en.jpg)"></a></div>
+               <div id="access">
+                  <h3>Access</h3>
+                  <ul>
+                     <li><a linkindex="1" accesskey="0" title="Home" href="/en/">Home Alt+0</a></li>
+                     <li><a linkindex="2" accesskey="1" title="Navigation" href="#navigation">Navigation Alt+1</a></li>
+                     <li><a linkindex="3" accesskey="2" title="Content" href="#main">Content Alt+2</a></li>
+                  </ul>
+               </div><span id="mobile-search-icon" class="mobile-search-icon"><i class="search-icon-image"></i></span><div id="search">
+                  <h3>Search</h3>
+                  <form id="search_form" action="?"><span id="search_label"><label for="search"> Search the
+                           <acronym title="World Health Organization">WHO</acronym>.int site</label></span><span id="search_input"><input name="search" id="search" title="Search the site" type="text" style="position:static"></span><label for="search_submit" class="invisible"> Submit </label><input id="st" type="hidden" name="st" value="main;imr;country;metadata;resources"><input id="search_submit" type="submit" value="Search" title="Search"></form>
+               </div><span id="mobile-nav-icon" class="mobile-nav-icon"><i class="nav-icon-image"></i></span><div id="navigation">
+                  <h3>Navigation</h3>
+                  <ul>
+                     <li id="navigation_home"><a linkindex="5" href="http://www.who.int/en/" title="Home"><span>Home</span></a></li>
+                     <li id="navigation_health-topics"><a href="http://www.who.int/topics/en/" title="Health topics"><span>Health topics</span></a></li>
+                     <li id="navigation_data-and-statistics" class="selected"><a href="http://www.who.int/research/en/" title="Data"><span>Data</span></a></li>
+                     <li id="navigation_media-centre"><a href="http://www.who.int/entity/mediacentre/en/" title="Media centre"><span>Media centre</span></a></li>
+                     <li id="navigation_publications"><a href="http://www.who.int/publications/en/" title="Publications"><span>Publications</span></a></li>
+                     <li id="navigation_countries"><a linkindex="6" href="http://www.who.int/countries/en/" title="Countries"><span>Countries</span></a></li>
+                     <li id="navigation_programmes-and-projects"><a linkindex="7" href="http://www.who.int/entity/en/" title="Programmes"><span>Programmes</span></a></li>
+                     <li id="navigation_about-who" class="last  "><a href="http://www.who.int/about/en/" title="About WHO"><span>About WHO</span></a></li>
+                  </ul>
+               </div>
+               <div class="clear"></div>
+               <div id="language">
+                  <h3>Language</h3>
+                  <div class="language_container">
+                     <div id="owl-language-carousel" dir="ltr" class="owl-carousel owl-theme">
+                        <div id="language_ar" class="item  disabled"><a href="#" title="هذه الصفحة ليست متاحة باللغة العربية"><span dir="rtl">عربي</span></a></div>
+                        <div id="language_zh" class="item  disabled"><a href="#" title="此网页无中文版"><span>中文</span></a></div>
+                        <div id="language_en" class="item  selected"><a href="../en/index.html" title="English"><span>English</span></a></div>
+                        <div id="language_fr" class="item  disabled"><a href="#" title="Cette page n9est pas disponible en français."><span>Français</span></a></div>
+                        <div id="language_ru" class="item  disabled"><a href="#" title="Эта страница на русском языке отсутствует"><span>Русский</span></a></div>
+                        <div id="language_es" class="item last disabled"><a href="#" title="Esta pégina no esté disponible en castellano"><span>Español</span></a></div>
+                     </div>
+                  </div>
+               </div>
+               <ul class="header-social-links">
+                  <li><a href="http://www.who.int/about/licensing/rss/en/index.html" target="_blank" class="rss">RSS Feed</a></li>
+                  <li><a href="http://www.youtube.com/who" target="_blank" class="youtube">Youtube</a></li>
+                  <li><a href="https://twitter.com/who" target="_blank" class="twitter">Twitter</a></li>
+                  <li><a href="https://www.facebook.com/WHO" target="_blank" class="facebook">Facebook</a></li>
+                  <li><a href="https://plus.google.com/+who/posts" target="_blank" class="googleplus">Google +</a></li>
+               </ul>
+            </div>
+            <div id="main">
+               <div id="title">
+                  <h2>Ebola data and statistics</h2>
+               </div>
+               <div id="sidebar">
+                  <div id="subnavigation">
+                     <h3>Menu</h3>
+                     <ul class="subnavigation">
+                        <li id="__gar_home" class="leave"><a href="http://www.who.int/entity/csr/en/">GAR Home</a></li>
+                        <li id="__alert_response_operations" class="leave"><a href="http://www.who.int/entity/csr/alertresponse/en/">Alert &amp; Response Operations</a></li>
+                        <li id="__diseases"><a href="http://www.who.int/entity/csr/disease/en/">Diseases</a></li>
+                        <li id="__goarn" class="leave"><a href="http://www.who.int/entity/csr/outbreaknetwork/en/">Global Outbreak Alert &amp; Response Network</a></li>
+                        <li id="__sitreps" class="leave"><a href="http://www.who.int/entity/csr/disease/ebola/situation-reports/en/">Situation reports</a></li>
+                        <li id="__data" class="leave selected"><a href="node.ebola-sitrep">Ebola data and statistics</a></li>
+                     </ul>
+                  </div>
+               </div>
+               <div id="content">
+                  <div id="miniBreadcrumb"><a style="color:#9F9F9F;font-size:10px;font-weight:bold;" href="node.ebola-sitrep" title="Ebola data and statistics">Ebola data and statistics</a> &gt; <a style="color:#9F9F9F;font-size:10px;font-weight:bold;" href="node.ebola-sitrep.main-countries?lang=en">Countries with intense transmission</a><br><br></div>
+                  <table width="100%">
+                     <tr>
+                        <td style="vertical-align:middle;">
+                           <div class="columns">
+                              <h1>Situation summary<br>Data published on 29 July 2015
+                              </h1><span style="color:#666666;float:right;font-size:11px">             Data from National situation reports.           </span><h3 class="section_head1">Also available (171items):</h3>
+                              <div style="max-height:200px;overflow:auto;">
+                                 <ul class="list_dash">
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-latest?lang=en">Latest available situation summary, 29 July 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150728?lang=en">Data published on 28 July 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150727?lang=en">Data published on 27 July 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150724?lang=en">Data published on 24 July 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150723?lang=en">Data published on 23 July 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150722?lang=en">Data published on 22 July 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150721?lang=en">Data published on 21 July 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150720?lang=en">Data published on 20 July 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150717?lang=en">Data published on 17 July 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150716?lang=en">Data published on 16 July 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150715?lang=en">Data published on 15 July 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150714?lang=en">Data published on 14 July 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150713?lang=en">Data published on 13 July 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150710?lang=en">Data published on 10 July 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150709?lang=en">Data published on 09 July 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150708?lang=en">Data published on 08 July 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150707?lang=en">Data published on 07 July 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150706?lang=en">Data published on 06 July 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150703?lang=en">Data published on 03 July 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150702?lang=en">Data published on 02 July 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150701?lang=en">Data published on 01 July 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150630?lang=en">Data published on 30 June 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150629?lang=en">Data published on 29 June 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150626?lang=en">Data published on 26 June 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150625?lang=en">Data published on 25 June 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150624?lang=en">Data published on 24 June 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150623?lang=en">Data published on 23 June 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150622?lang=en">Data published on 22 June 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150619?lang=en">Data published on 19 June 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150618?lang=en">Data published on 18 June 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150617?lang=en">Data published on 17 June 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150616?lang=en">Data published on 16 June 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150615?lang=en">Data published on 15 June 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150612?lang=en">Data published on 12 June 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150611?lang=en">Data published on 11 June 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150610?lang=en">Data published on 10 June 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150609?lang=en">Data published on 09 June 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150608?lang=en">Data published on 08 June 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150605?lang=en">Data published on 05 June 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150604?lang=en">Data published on 04 June 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150603?lang=en">Data published on 03 June 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150602?lang=en">Data published on 02 June 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150601?lang=en">Data published on 01 June 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150529?lang=en">Data published on 29 May 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150528?lang=en">Data published on 28 May 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150527?lang=en">Data published on 27 May 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150526?lang=en">Data published on 26 May 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150525?lang=en">Data published on 25 May 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150522?lang=en">Data published on 22 May 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150521?lang=en">Data published on 21 May 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150520?lang=en">Data published on 20 May 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150519?lang=en">Data published on 19 May 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150518?lang=en">Data published on 18 May 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150515?lang=en">Data published on 15 May 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150514?lang=en">Data published on 14 May 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150513?lang=en">Data published on 13 May 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150512?lang=en">Data published on 12 May 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150511?lang=en">Data published on 11 May 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150508?lang=en">Data published on 08 May 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150507?lang=en">Data published on 07 May 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150506?lang=en">Data published on 06 May 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150505?lang=en">Data published on 05 May 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150504?lang=en">Data published on 04 May 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150501?lang=en">Data published on 01 May 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150430?lang=en">Data published on 30 April 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150429?lang=en">Data published on 29 April 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150428?lang=en">Data published on 28 April 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150427?lang=en">Data published on 27 April 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150424?lang=en">Data published on 24 April 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150423?lang=en">Data published on 23 April 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150422?lang=en">Data published on 22 April 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150421?lang=en">Data published on 21 April 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150420?lang=en">Data published on 20 April 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150417?lang=en">Data published on 17 April 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150416?lang=en">Data published on 16 April 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150415?lang=en">Data published on 15 April 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150414?lang=en">Data published on 14 April 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150413?lang=en">Data published on 13 April 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150410?lang=en">Data published on 10 April 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150409?lang=en">Data published on 09 April 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150408?lang=en">Data published on 08 April 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150407?lang=en">Data published on 07 April 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150402?lang=en">Data published on 02 April 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150401?lang=en">Data published on 01 April 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150331?lang=en">Data published on 31 March 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150330?lang=en">Data published on 30 March 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150327?lang=en">Data published on 27 March 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150326?lang=en">Data published on 26 March 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150325?lang=en">Data published on 25 March 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150324?lang=en">Data published on 24 March 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150323?lang=en">Data published on 23 March 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150320?lang=en">Data published on 20 March 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150319?lang=en">Data published on 19 March 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150318?lang=en">Data published on 18 March 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150317?lang=en">Data published on 17 March 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150316?lang=en">Data published on 16 March 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150313?lang=en">Data published on 13 March 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150312?lang=en">Data published on 12 March 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150311?lang=en">Data published on 11 March 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150310?lang=en">Data published on 10 March 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150309?lang=en">Data published on 09 March 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150306?lang=en">Data published on 06 March 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150305?lang=en">Data published on 05 March 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150304?lang=en">Data published on 04 March 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150302?lang=en">Data published on 02 March 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150227?lang=en">Data published on 27 February 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150226?lang=en">Data published on 26 February 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150225?lang=en">Data published on 25 February 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150223?lang=en">Data published on 23 February 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150220?lang=en">Data published on 20 February 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150219?lang=en">Data published on 19 February 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150218?lang=en">Data published on 18 February 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150217?lang=en">Data published on 17 February 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150216?lang=en">Data published on 16 February 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150213?lang=en">Data published on 13 February 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150212?lang=en">Data published on 12 February 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150211?lang=en">Data published on 11 February 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150210?lang=en">Data published on 10 February 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150209?lang=en">Data published on 09 February 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150206?lang=en">Data published on 06 February 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150205?lang=en">Data published on 05 February 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150204?lang=en">Data published on 04 February 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150203?lang=en">Data published on 03 February 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150202?lang=en">Data published on 02 February 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150130?lang=en">Data published on 30 January 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150129?lang=en">Data published on 29 January 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150128?lang=en">Data published on 28 January 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150127?lang=en">Data published on 27 January 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150126?lang=en">Data published on 26 January 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150123?lang=en">Data published on 23 January 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150122?lang=en">Data published on 22 January 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150121?lang=en">Data published on 21 January 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150120?lang=en">Data published on 20 January 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150119?lang=en">Data published on 19 January 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150116?lang=en">Data published on 16 January 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150115?lang=en">Data published on 15 January 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150114?lang=en">Data published on 14 January 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150113?lang=en">Data published on 13 January 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150112?lang=en">Data published on 12 January 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150109?lang=en">Data published on 09 January 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150108?lang=en">Data published on 08 January 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150107?lang=en">Data published on 07 January 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150106?lang=en">Data published on 06 January 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150105?lang=en">Data published on 05 January 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20150102?lang=en">Data published on 02 January 2015</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20141231?lang=en">Data published on 31 December 2014</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20141230?lang=en">Data published on 30 December 2014</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20141229?lang=en">Data published on 29 December 2014</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20141226?lang=en">Data published on 26 December 2014</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20141224?lang=en">Data published on 24 December 2014</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20141223?lang=en">Data published on 23 December 2014</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20141222?lang=en">Data published on 22 December 2014</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20141219?lang=en">Data published on 19 December 2014</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20141217?lang=en">Data published on 17 December 2014</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20141215?lang=en">Data published on 15 December 2014</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20141212?lang=en">Data published on 12 December 2014</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20141211?lang=en">Data published on 11 December 2014</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20141210?lang=en">Data published on 10 December 2014</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20141208?lang=en">Data published on 08 December 2014</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20141205?lang=en">Data published on 05 December 2014</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20141204?lang=en">Data published on 04 December 2014</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20141203?lang=en">Data published on 03 December 2014</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20141202?lang=en">Data published on 02 December 2014</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20141201?lang=en">Data published on 01 December 2014</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20141128?lang=en">Data published on 28 November 2014</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20141126?lang=en">Data published on 26 November 2014</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20141121?lang=en">Data published on 21 November 2014</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20141119?lang=en">Data published on 19 November 2014</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20141114?lang=en">Data published on 14 November 2014</a></li>
+                                    <li><a class="link_internal" href="view.ebola-sitrep.ebola-summary-20141112?lang=en">Data published on 12 November 2014</a></li>
+                                 </ul>
+                              </div>
+                           </div>
+                        </td>
+                        <td style="float:right">
+                           <fieldset class="buttonbar">
+                              <ul></ul>
+                           </fieldset>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td colspan="2">&nbsp;</td>
+                     </tr>
+                  </table><iframe id="content_iframe" width="100%" frameborder="0" onload="resizeMe(this)" style="overflow:hidden" src="../athena/xmart/EBOLA_MEASURE/CASES,DEATHS?format=html&amp;profile=filter&amp;x-format=html&amp;x-profile=xtab&amp;x-sideaxis=COUNTRY;EPI_DATE;CASE_DEFINITION&amp;x-topaxis=EBOLA_MEASURE;INDICATOR_TYPE&amp;filter=COUNTRY:GIN;COUNTRY:UNSPECIFIED;COUNTRY:LBR;COUNTRY:UNSPECIFIED;COUNTRY:SLE;COUNTRY:UNSPECIFIED;LOCATION:-;DATAPACKAGEID:2015-07-29;INDICATOR_TYPE:SITREP_CUMULATIVE;INDICATOR_TYPE:SITREP_CUMULATIVE_21_DAYS;SEX:-"></iframe></div>
+               <div class="clear"></div>
+            </div>
+            <div id="breadcrumb">
+               <h2>You are here:</h2>
+               <ul>
+                  <li class=""><a href="node.ebola-sitrep" title="Ebola data and statistics">Ebola data and statistics</a></li>
+                  <li class=""><a href="node.ebola-sitrep.main-countries?lang=en">Countries with intense transmission</a></li>
+                  <li class="selected"><a href="node.ebola-sitrep.ebola-summary?lang=en">Situation summary</a></li>
+               </ul>
+               <div class="clear"></div>
+            </div>
+            <div id="footer">
+               <div id="doormat">
+                  <h2>Quick Links</h2>
+                  <div class="doormat_col_1_3">
+                     <h3>Sitemap</h3>
+                     <ul class="footer-col-links">
+                        <li><a href="http://www.who.int/en/index.html">Home</a></li>
+                        <li><a href="http://www.who.int/topics/en/index.html">Health topics</a></li>
+                        <li><a href="http://www.who.int/research/en/index.html">Data</a></li>
+                        <li><a href="http://www.who.int/entity/mediacentre/en/index.html">Media centre</a></li>
+                        <li><a href="http://www.who.int/publications/en/index.html">Publications</a></li>
+                        <li><a href="http://www.who.int/countries/en/index.html">Countries</a></li>
+                        <li><a href="http://www.who.int/entity/en/index.html">Programmes</a></li>
+                        <li><a href="http://www.who.int/about/en/index.html">About WHO</a></li>
+                     </ul>
+                  </div>
+                  <div class="doormat_col_2_3">
+                     <h3>Help and services</h3>
+                     <ul class="footer-col-links">
+                        <li><a href="http://www.who.int/about/contacthq/en/index.html">Contacts</a></li>
+                        <li><a href="http://www.who.int/suggestions/faq/en/index.html">FAQs</a></li>
+                        <li><a href="http://www.who.int/entity/employment/en/index.html">Employment</a></li>
+                        <li><a href="http://www.who.int/suggestions/en/index.html">Feedback</a></li>
+                        <li><a href="http://www.who.int/about/privacy/en/index.html">Privacy</a></li>
+                        <li><a href="http://www.who.int/about/scamalert/en/index.html">E-mail scams</a></li>
+                     </ul>
+                  </div>
+                  <div class="doormat_col_3_3">
+                     <h3>WHO Regional Offices</h3>
+                     <ul class="footer-col-links">
+                        <li><a href="http://www.afro.who.int/">WHO African Region</a></li>
+                        <li><a href="http://www.paho.org/">WHO Region of the Americas</a></li>
+                        <li><a href="http://www.searo.who.int/">WHO South-East Asia Region</a></li>
+                        <li><a href="http://www.euro.who.int/">WHO European Region</a></li>
+                        <li><a href="http://www.emro.who.int/">WHO Eastern Mediterranean Region</a></li>
+                        <li><a href="http://www.wpro.who.int/">WHO Western Pacific Region</a></li>
+                     </ul>
+                  </div>
+                  <div class="clear"></div>
+                  <div>
+                     <ul class="footer-social-links">
+                        <li><a class="footer-rss" href="http://www.who.int/about/licensing/rss/en/index.html">RSS Feeds</a></li>
+                        <li><a class="footer-youtube" href="http://www.youtube.com/who"><acronym title="World Health Organization">
+                                 WHO</acronym> YouTube channel</a></li>
+                        <li><a class="footer-twitter" href="http://twitter.com/who">Follow 
+                              <acronym title="World Health Organization">
+                                 WHO</acronym> on Twitter</a></li>
+                        <li><a class="footer-facebook" href="https://www.facebook.com/WHO"><acronym title="World Health Organization">
+                                 WHO</acronym> Facebook page</a></li>
+                        <li><a class="footer-gplus" href="https://plus.google.com/+who"><acronym title="World Health Organization">
+                                 WHO</acronym> Google+ page</a></li>
+                     </ul>
+                  </div>
+                  <div class="clear"></div>
+               </div>
+               <div id="foot">
+                  <p><a href="http://www.who.int/about/copyright/en/">© <acronym title="World Health Organization">
+                           WHO</acronym> 2015</a></p>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

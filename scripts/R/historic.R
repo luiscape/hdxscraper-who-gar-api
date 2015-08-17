@@ -1,44 +1,59 @@
-## Loading historic data.
+#
+## LOADS HISTORIC DATA
 #  Script to load the current data from HDX
 #  into a database so we can merge the new
 #  records correctly.
+#
 
-# Dependencies
 library(RCurl)
 library(rjson)
 
-# SW helper function
-onSw <- function(d = T, l = 'tool/') {
-  if (d) return(l)
-  else return("")
-}
+#
+# Helper scripts.
+#
+source('scripts/R/helpers/deploy.R')
+source(pathDeploy('scripts/R/helpers/write_tables.R'))
 
-# Loading other helper functions
-source(paste0(onSw(), 'code/write_tables.R'))
-
-# Helper function to get a resource_id
-# from CKAN.
+#
+# Get resource URL from an
+# HDX query.
+# 
 getResourceUrl <- function(resource_id) {
-  # query ckan for the resource id
+
+  #
+  # Query a CKAN resource ID.
+  #
   base_url = 'https://data.hdx.rwlabs.org/api/action/resource_show?id='
   url = paste0(base_url, resource_id)
-  # navigate and grab url
+
+  #
+  # Collect URL from JSON.
+  #
   doc <- fromJSON(getURL(url))
   resource_url <- doc$result$url
+
+  #
+  # Check that the URL works. 
+  #
+  if (is.null(resource_url)) stop('Error fetching download URL from HDX. Check resource id.')
   return(resource_url)
 }
 
-# Getting historic data and adding it
-# to a database.
+#
+# Download historic data
+# and add to database.
+#
 getHistoricData <- function() {
-  url <- getResourceUrl('f48a3cf9-110e-4892-bedf-d4c1d725a7d1')
-  temp_f = paste0(onSw(), 'data/temp.csv')
+  url <- getResourceUrl('c59b5722-ca4b-41ca-a446-472d6d824d01')
+  temp_f = pathDeploy('data/temp.csv')
   download.file(url, temp_f, method = "wget", quiet = T)
   data <- read.csv(temp_f)
   return(data)
 }
 
-# Wrapper for everything.
+#
+# Wrapper
+#
 loadHistoricData <- function() {
   cat('-----------------------------\n')
   cat('Collecting historic data.\n')
